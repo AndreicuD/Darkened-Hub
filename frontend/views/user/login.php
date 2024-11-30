@@ -11,7 +11,7 @@ $this->title = Yii::t('app', 'Login');
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h1 class="text-center" class="page_title"><?= Html::encode($this->title) ?></h1>
+    <h1 class="text-center page_title"><?= Html::encode($this->title) ?></h1>
 
     <p class="text-center"><?= Yii::t('app', 'Please fill out the following fields to login:') ?></p>
 

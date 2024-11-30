@@ -51,6 +51,16 @@ class SiteController extends Controller
     }
 
     /**
+     * Displays concerts page.
+     *
+     * @return mixed
+     */
+    public function actionConcerts()
+    {
+        return $this->render('concerts');
+    }
+
+    /**
      * Displays contact page.
      *
      * @return mixed

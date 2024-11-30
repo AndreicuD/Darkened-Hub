@@ -11,7 +11,7 @@ $this->title = 'Resend verification email';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-resend-verification-email">
-    <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
+    <h1 class="text-center page_title"><?= Html::encode($this->title) ?></h1>
 
     <p class="text-center">Please fill out your email. A verification email will be sent there.</p>
 

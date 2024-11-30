@@ -297,6 +297,11 @@ header .navbar-brand img {
 {
     text-decoration: none;
 }
+@media(max-width: 767px) {
+	.contact_map {
+		display: none;
+	}
+}
 
 header .navbar {
 	--bs-bg-opacity: 0;
@@ -317,6 +322,7 @@ a {
 	padding: 20px;
 	text-align: center;
 	text-shadow: 0px 0px 30px #3c3863;
+	font-weight: bold;
 }
 
 .hero {
@@ -367,34 +373,56 @@ a {
 	/*box-shadow: inset 0 .5em .5em rgba(0, 0, 0, .1);*/
 }
 
+/* everything related to the songs table */
 .table_wrapper {
 	overflow: scroll;
 	overflow-y: scroll;
+	border-radius: 10px;
+	border: 1px solid #160f1f;
 }
 .songs_table {
 	text-align: left;
 	width: max(100%, 65rem);
 	border-collapse: collapse;
+	font-size: 0.9em;
+	--table-dark-color: #160f1fb6;
+	--table-light-color: #22192eb6;
 }
-.songs_table th, td{
+/* make the table head italic and dark */
+.songs_table thead tr {
+	font-style: italic;
+	background-color: var(--table-dark-color);
+}
+/* apply padding and bottom border to every cell */
+.songs_table th,
+.songs_table td{
 	padding: 0.5em;
 }
-.songs_table thead {
-	font-style: italic;
+
+/* make every other row a different color */
+.songs_table tbody tr {
+	background-color: var(--table-dark-color);
+}
+.songs_table tbody tr:nth-of-type(odd) {
+	background-color: var(--table-light-color);
+}
+/* acommodate for phone users */
+.songs_table thead th:first-of-type {
+	background-color: #160f1f;
+}
+.songs_table tbody tr th {
+	background-color: #160f1f;
+}
+.songs_table tbody tr:nth-of-type(odd) th {
+	background-color: #22192e;
 }
 .songs_table th:first-child {
 	position: sticky;
 	inset-inline-start: 0;
 	border-inline-end: none;
+	width: 10%;
 }
-@media(max-width: 767px) {
-	.songs_table th:first-child {
-		background-color: black;
-	}
-	.songs_table tbody th {
-		background-color: black;
-	}
-}
+
 
 .background {
 	position:fixed;
