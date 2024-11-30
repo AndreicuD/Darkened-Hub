@@ -30,8 +30,8 @@ $this->title = Yii::t('app', 'Login');
                     <!--<br>
                     Need new verification email? <?= Html::a('Resend', ['user/resend-verification-email']) ?>-->
                 </div>
-
-                <div class="form-group">
+                <br>
+                <div class="form-group" style="text-align: center;">
                     <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
 

@@ -348,75 +348,8 @@ a {
 		font-size: 1.5em;
 	}
 }
-
-/**** music grid ****/
-
-
 .small_gray_text {
 	color:darkgrey;
-}
-#music_interface {
-	border-top: 1px solid #c4c4c4;
-	border-bottom: 1px solid #c4c4c4;
-}
-.cell {
-	padding: 0;
-	margin: 0;
-	border-width: 1px 1px 0px 0px;
-	border-right-style: solid;
-	border-color:#d6d6d6;
-	border-right-color: #c4c4c4;
-	height:25px;
-}
-.cell.note_8 {
-	border-right-color: #444444;
-}
-.bottom_settings_bar {
-	background-color: white;
-	padding: 1em;
-	border-style: solid;
-	border-width: 1px;
-	border-color: #c4c4c4;
-	border-radius: 10px;
-}
-.piano_key_black {
-	background-color: black;	
-}
-.piano_key_white {
-	background-color: white;
-}
-.played_col {
-	/*background-color: #ecf56d;*/
-	background-color: var(--secondary-color);
-}
-.active_cell {
-	color: white;
-	background-color: var(--primary-color);
-}
-.piano_key {
-	border-width: 0px 1px 1px 1px;
-	border-color: #c4c4c4;
-	border-style: solid;
-}
-@media(max-width:767px) {
-	#music_interface {
-		overflow-x: scroll;
-		margin: 0 calc(var(--bs-gutter-x) * -0.5)
-	}
-	#music_interface .row {
-		flex-flow: row;
-		width: 825px;
-	}
-	.cell {
-		display: table-cell;
-		width: 25px;
-	}
-}
-.piano_settings {
-	padding-left: 20%;
-	margin-left: auto;
-	padding-right: 20%;
-	margin-right: auto;
 }
 .icon_btn {
 	font-family: "Times New Roman", Times, serif;
@@ -427,15 +360,6 @@ a {
 .trash_btn svg{
 	color: var(--bs-danger);
 }
-.form-like button.like_btn.is_liked_by_user svg {
-	color: #fd3c8c;
-	fill: #fd3c8c;
-}
-.icon_btn svg:hover,
-.icon_btn svg:focus{
-	animation: pulse 1s infinite;
-}
-
 .shadow_divider {
 	height: 3rem;
 	border: solid rgba(0, 0, 0, 0.15);
@@ -443,12 +367,33 @@ a {
 	/*box-shadow: inset 0 .5em .5em rgba(0, 0, 0, .1);*/
 }
 
-.chime_list_item {
-	background: rgb(255,255,255);
-	background: linear-gradient(160deg, rgba(252,254,255,1) 0%, rgba(240,250,254,1) 45%, #caeefc 90%);
-	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-	width: 100%;
-	display: inline-flex;
+.table_wrapper {
+	overflow: scroll;
+	overflow-y: scroll;
+}
+.songs_table {
+	text-align: left;
+	width: max(100%, 65rem);
+	border-collapse: collapse;
+}
+.songs_table th, td{
+	padding: 0.5em;
+}
+.songs_table thead {
+	font-style: italic;
+}
+.songs_table th:first-child {
+	position: sticky;
+	inset-inline-start: 0;
+	border-inline-end: none;
+}
+@media(max-width: 767px) {
+	.songs_table th:first-child {
+		background-color: black;
+	}
+	.songs_table tbody th {
+		background-color: black;
+	}
 }
 
 .background {

@@ -37,7 +37,7 @@ VANTA.FOG({
   minHeight: 200.00,
   minWidth: 200.00,
   highlightColor: 0x0,
-  midtoneColor: 0x110e2f,
+  midtoneColor: 0x3b205e,
   lowlightColor: 0x000000,
   baseColor: 0x0,
   blurFactor: 0.61,

@@ -7,15 +7,16 @@ use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $widget yii\widgets\ListView this widget instance */
-/* @var $modelLike common\models\ChimeLike */
 /* @var $key mixed the key value associated with the data item */
 /* @var $index integer the zero-based index of the data item in the items array returned by the data provider */
 ?>
 
-<div class="container mt-3">
-    <div class="card mb-3 chime_list_item" id="list_item">
-        <div class="row align-items-center">
-            <p class="mb-1">Title: <strong><span id="song_title"><?= Html::encode($model->title) ?></span></strong></p>
-        </div>
-    </div>
-</div>
+<th><span id="song_title"><?= Html::encode($model->title) ?></span></th>
+<td><span id="song_artist"><?= Html::encode($model->artist) ?></span></td>
+<td><span id="song_first_guitar"><?= Html::encode($model->first_guitar) ?></span></td>
+<td><span id="song_second_guitar"><?= Html::encode($model->second_guitar) ?></span></td>
+<td><span id="song_bass"><?= Html::encode($model->bass) ?></span></td>
+<td><span id="song_drums"><?= Html::encode($model->drums) ?></span></td>
+<td><span id="song_piano"><?= Html::encode($model->piano) ?></span></td>
+<td><span id="song_first_voice"><?= Html::encode($model->first_voice) ?></span></td>
+<td><span id="song_second_voice"><?= Html::encode($model->second_voice) ?></span></td>

@@ -8,7 +8,7 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
 $this->title = 'Request password reset';
-$this->params['breadcrumbs'][] = $this->title;
+//$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-request-password-reset">
     <h1 class="text-center"><?= Html::encode($this->title) ?></h1>
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php $form = ActiveForm::begin(['id' => 'request-password-reset-form', 'layout' => 'floating']); ?>
 
                 <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
-
+                <br>
                 <div class="form-group">
                     <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
                 </div>

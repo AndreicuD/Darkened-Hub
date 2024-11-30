@@ -14,7 +14,8 @@ $this->title = Yii::t('app', 'Signup');
 <div class="site-signup">
     <h1 class="text-center" class="page_title"><?= Html::encode($this->title) ?></h1>
 
-    <p class="text-center"><?= Yii::t('app', 'Please fill out the following fields to sign-up:') ?></p>
+    <p class="text-center text-danger lead"><?= Yii::t('app', "This won't do anything if you aren't in the club.") ?></p>
+    <p class="text-center text-danger lead"><?= Yii::t('app', "Daca nu esti din club, incerci degeaba.") ?></p>
 
     <div class="row justify-content-center">
         <div class="col-lg-6">
@@ -23,11 +24,8 @@ $this->title = Yii::t('app', 'Signup');
                 <?= $form->field($model, 'email')->label(Yii::t('app', 'Email')) ?>
                 <?= $form->field($model, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
 
-                <hr>
-                <p><?= Yii::t('app', 'This will form your username.') ?></p>
-
-                <?= $form->field($model, 'firstname')->label(Yii::t('app', 'Firstname')) ?>
-                <?= $form->field($model, 'lastname')->label(Yii::t('app', 'Lastname')) ?>
+                <?= $form->field($model, 'firstname')->label(Yii::t('app', 'Username')) ?>
+                <!--<?= $form->field($model, 'lastname')->label(Yii::t('app', 'Lastname')) ?>-->
                 <!--<?= $form->field($model, 'sex')->dropDownList(\common\models\User::sexList(), ['prompt' => Yii::t('app', 'Select the sex ...')]); ?>-->
                 <!--<?= $form->field($model, 'birth_date', ['inputOptions' => ['type' => 'date']])->label(Yii::t('app', 'Birth date')); ?>-->
 
@@ -36,9 +34,8 @@ $this->title = Yii::t('app', 'Signup');
                 
                 <!--<?= $form->field($model, 'phone')->textInput()->label(Yii::t('app', 'Phone')); ?>-->
 
-                <hr>
-
-                <div class="form-group">
+                <br>
+                <div class="form-group" style="text-align: center;">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>
 
