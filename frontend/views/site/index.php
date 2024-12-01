@@ -14,5 +14,5 @@ $this->title = 'Darkened Hub';
         <p class="display-5 fw-bold lh-1 mb-3 hero_title user-select-none">Darkened</p>
         <p class="display-5 fw-bold lh-1 mb-3 hero_title user-select-none">Hub</p>
         <br>
-        <p class="lead"><?= Yii::t('app', 'Find more information about our next concert '); ?> <a href="<?= Url::toRoute(['song/index']); ?>">here</a>.</p>
+        <p class="lead"><?= Yii::t('app', 'Find more information about our next concert '); ?> <a href="<?= Url::toRoute(['site/concerts']); ?>">here</a>.</p>
     </div>

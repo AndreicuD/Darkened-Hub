@@ -57,14 +57,20 @@ VANTA.FOG({
             'class' => 'navbar navbar-expand-md navbar-dark',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'Concerts', 'url' => ['/site/concerts']],
-    ];
     if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/user/signup']];
+        $menuItems = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Concerts', 'url' => ['/site/concerts']],
+            //['label' => 'Signup', 'url' => ['/user/signup']],
+        ];
+    } else {
+        $menuItems = [
+            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Concert', 'url' => ['/song/concert']],
+            ['label' => 'Songs', 'url' => ['/song/index']],
+        ];
     }
 
     echo Nav::widget([
@@ -74,7 +80,7 @@ VANTA.FOG({
     if (Yii::$app->user->isGuest) {
         echo Html::tag('div',Html::a('Login',['/user/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex']]);
     } else {
-        echo Html::tag('div',Html::a('Logout (' . Yii::$app->user->identity->full_name . ')',['/user/logout'],['class' => ['btn btn-link logout text-decoration-none']]),['class' => ['d-flex']]);
+        echo Html::tag('div',Html::a('Logout (' . Yii::$app->user->identity->username . ')',['/user/logout'],['class' => ['btn btn-link logout text-decoration-none']]),['class' => ['d-flex']]);
     }
     NavBar::end();
     ?>

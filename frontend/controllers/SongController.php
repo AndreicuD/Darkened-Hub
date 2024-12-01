@@ -16,7 +16,21 @@ use yii\web\Response;
  */
 class SongController extends Controller
 {
-
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => ['index', 'concert'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -47,6 +61,20 @@ class SongController extends Controller
         $dataProvider->pagination->defaultPageSize = 12;
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionConcert()
+    {
+        $searchModel = new Song();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageParam = 'p';
+        $dataProvider->pagination->forcePageParam = 0;
+        $dataProvider->pagination->defaultPageSize = 12;
+
+        return $this->render('concert', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

@@ -13,7 +13,6 @@ use common\models\ChimeLike;
  */
 class SiteController extends Controller
 {
-
     /**
      * {@inheritdoc}
      */

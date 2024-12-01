@@ -162,14 +162,6 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getChimeLikes()
-    {
-        return $this->hasMany(ChimeLike::class, ['user_id' => 'id']);
-    }
-
-    /**
      * {@inheritdoc}
      */
     public static function findIdentity($id): User|IdentityInterface|null
