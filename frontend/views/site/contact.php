@@ -20,7 +20,9 @@ $this->title = 'Contact';
 
     <div class="row justify-content-center">
         <div style="display: inline; text-align: center; padding-bottom: 1rem; font-size: 2em;">
-            <a href="https://www.instagram.com/darkened_tunes/" target="_blank" style="color: #ffffff; text-decoration: none;"><i class="fa fa-instagram fa-lg"></i> - Instagram</a>
+            <a href="https://www.instagram.com/darkened_tunes/" target="_blank" style="color: #ffffff; text-decoration: none;" class="page_title">
+                <i class="fa fa-instagram fa-lg"></i> - Instagram
+            </a>
         </div>
 
         <div class="col-lg-6">

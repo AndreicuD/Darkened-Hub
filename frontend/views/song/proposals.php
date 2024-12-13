@@ -9,17 +9,26 @@ use yii\helpers\Url;
 use yii\bootstrap5\ActiveForm;
 
 
-$this->title = 'Songs';
+$this->title = 'Proposals';
 $this->registerJsFile('/js/popup.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 //$this->params['breadcrumbs'][] = Yii::t('app', 'Songs');
 ?>
 <div class="songs-index">
-    <h1 style="text-align: center;" class="page_title"><?= Yii::t('app', 'Songs'); ?></h1>
+    <h1 style="text-align: center;" class="page_title"><?= Yii::t('app', 'Proposals'); ?></h1>
 
-    <?= $this->render('_settingsbar', [
-        'searchModel' => $searchModel,
-        'page' => 'index',
-    ]) ?>
+    <ul class="settings_bar">
+        <li><button role="button" class="btn btn-primary" onclick="openPopup('addproposal_popup')">Add proposal</button></li>
+        <li style="float: left;"><?=Html::a('Clear Filters', Url::to(['song/proposals']), ['class' => 'btn btn-danger']); ?></li>
+        <li class="filters">
+            <?php $form = ActiveForm::begin(['id' => 'form-searchsong','method' => 'get', 'layout' => 'inline']); ?>
+            <?= $form->errorSummary($searchModel);?>
+            <?= $form->field($searchModel, 'title')->label(Yii::t('app', 'What proposal are you looking for?')) ?>
+
+            <input type="submit" value="Search" class="btn btn-primary search_button">
+            <?php ActiveForm::end(); ?>
+        </li>
+    </ul>
+    <hr>
     
     <div class="table_wrapper">       
         <table class="songs_table">
@@ -27,22 +36,18 @@ $this->registerJsFile('/js/popup.js', ['depends' => [\yii\web\JqueryAsset::class
                 <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Artist</th>
-                    <th scope="col">First Guitar</th>
-                    <th scope="col">Second Guitar</th>
-                    <th scope="col">Bass</th>
-                    <th scope="col">Drums</th>
-                    <th scope="col">Piano</th>
-                    <th scope="col">First Voice</th>
-                    <th scope="col">Second Voice</th>
-                    <th scope="col"></th>
+                    <th scope="col">More Info</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <?= ListView::widget([
                     'dataProvider' => $dataProvider,
-                    'itemView' => '_item',
-                    'viewParams' => [],
+                    'itemView' => '_proposal_item',
+                    'viewParams' => [
+                        'page' => '',
+                        'songModel' => $songModel,
+                    ],                           
                     'options' => [
                         'class' => 'song_in_table',
                     ],
@@ -64,17 +69,18 @@ $this->registerJsFile('/js/popup.js', ['depends' => [\yii\web\JqueryAsset::class
                 ]); ?>
             </tbody>
         </table>
-        
     </div>
-    <!-- add song popup -->
-    <div id="addsong_popup">
-        <div class="overlay_opaque" onclick="closePopup('addsong_popup')"></div>
-        <div class="popup">
-            <h1 class="page_title"><?= Yii::t('app', 'Add Song') ?></h1>
-            <?php $form = ActiveForm::begin([
-                'id' => 'form-addsong',
+</div>
+
+<!-- add proposal popup -->
+<div id="addproposal_popup">
+    <div class="overlay_opaque" onclick="closePopup('addproposal_popup')"></div>
+    <div class="popup">
+        <h1 class="page_title"><?= Yii::t('app', 'Add Proposal') ?></h1>
+        <?php $form = ActiveForm::begin([
+                'id' => 'form-addpublicproposal',
                 'layout' => 'floating',
-                'action' => ['song/create'], // Specify the route to the create action
+                'action' => ['song/createproposal'], // Specify the route to the create action
                 'method' => 'post',
             ]); ?>
     
@@ -84,47 +90,14 @@ $this->registerJsFile('/js/popup.js', ['depends' => [\yii\web\JqueryAsset::class
                 <?= $form->field($searchModel, 'title')->label(Yii::t('app', 'Title')) ?>
                 <?= $form->field($searchModel, 'artist')->label(Yii::t('app', 'Artist')) ?>
             </div>
-            <hr>
-            <div class="group_together">
-                <?= $form->field($searchModel, 'first_guitar')->label(Yii::t('app', 'First Guitar')) ?>
-                <?= $form->field($searchModel, 'second_guitar')->label(Yii::t('app', 'Second Guitar')) ?>
-            </div>
-            <div class="group_together">
-                <?= $form->field($searchModel, 'bass')->label(Yii::t('app', 'Bass')) ?>
-                <?= $form->field($searchModel, 'drums')->label(Yii::t('app', 'Drums')) ?>
-            </div>
-            <div class="group_together">
-                <?= $form->field($searchModel, 'first_voice')->label(Yii::t('app', 'First Voice')) ?>
-                <?= $form->field($searchModel, 'second_voice')->label(Yii::t('app', 'Second Voice')) ?>
-            </div>
-            <?= $form->field($searchModel, 'piano')->label(Yii::t('app', 'Piano')) ?>
-            <hr>
-            <div class="group_together">
-                <?= $form->field($searchModel, 'is_in_concert')->checkbox([
-                    'uncheck' => '0',
-                    'value' => '1',
-                    'id' => 'is-in-concert-checkbox', // Add an ID for targeting with JS
-                ]); ?>
-                
-                <?= $form->field($searchModel, 'setlist_spot')->label(Yii::t('app', 'Spot in Setlist')); ?>
-                <?= $form->field($searchModel, 'state')->dropDownList([
-                    '5' => $searchModel::stateList()['5'], // Gray for "Not done yet"
-                    '4' => $searchModel::stateList()['4'],   // Green for "Great"
-                    '3' => $searchModel::stateList()['3'],   // Yellow for "Ok"
-                    '2' => $searchModel::stateList()['2'],    // Orange for "Could be better.."
-                    '1' => $searchModel::stateList()['1'],    // Red for "Bad"
-                ], [
-                    'id' => 'song-state-dropdown',
-                    'class' => 'custom-class',
-                ]) ?>
-            </div>
+            <?= $form->field($searchModel, 'info')->textarea(['rows' => 2, 'style' => 'min-height: 80px']) ?>
             
             <br>
-
+            
             <div class="container text-center">
                 <div class="row">
                     <div class="col">
-                        <button onclick="closePopup('addsong_popup')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Close') ?></button>
+                        <button onclick="closePopup('addproposal_popup')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Close') ?></button>
                     </div>
                     <div class="col">
                         <input type="reset" value="Reset" class="btn btn-warning">
@@ -134,11 +107,11 @@ $this->registerJsFile('/js/popup.js', ['depends' => [\yii\web\JqueryAsset::class
                     </div>
                 </div>
             </div>
-            <?php ActiveForm::end(); ?>
-        </div>
+        <?php ActiveForm::end(); ?>
     </div>
+</div>
 
-    <script>
+<script>
         document.addEventListener('DOMContentLoaded', function () {
             const is_in_concert_checkbox = document.getElementById('is-in-concert-checkbox');
             const setlist_spot_input = document.getElementById('song-setlist_spot');
@@ -162,4 +135,3 @@ $this->registerJsFile('/js/popup.js', ['depends' => [\yii\web\JqueryAsset::class
         });
 
     </script>
-</div>

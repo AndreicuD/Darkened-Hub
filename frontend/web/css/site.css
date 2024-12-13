@@ -121,6 +121,11 @@
 	--bs-form-valid-border-color: #198754;
 	--bs-form-invalid-color: #dc3545;
 	--bs-form-invalid-border-color: #dc3545;
+
+	--table-dark-color: #160f1f85;
+	--table-dark-notransp: #160f1f;
+	--table-light-color: #22192e85;
+	--table-light-notransp: #22192e;
 }
 :root,
 [data-bs-theme=dark] {
@@ -302,7 +307,6 @@ header .navbar-brand img {
 		display: none;
 	}
 }
-
 header .navbar {
 	--bs-bg-opacity: 0;
 }
@@ -311,6 +315,9 @@ footer .footer {
 }
 a {
 	color: var(--primary-color);
+}
+.form-floating {
+	width: 100%;
 }
 @keyframes pulse {
 	0% { transform: scale(1); }
@@ -321,6 +328,10 @@ a {
 .page_title {
 	padding: 20px;
 	text-align: center;
+	text-shadow: 0px 0px 30px #3c3863;
+	font-weight: bold;
+}
+.glow_text {
 	text-shadow: 0px 0px 30px #3c3863;
 	font-weight: bold;
 }
@@ -363,6 +374,10 @@ a {
 	background-color: transparent;
 	font-size: x-large;
 }
+.icon_btn svg:hover,
+.icon_btn svg:focus{
+	animation: pulse 1s infinite;
+}
 .trash_btn svg{
 	color: var(--bs-danger);
 }
@@ -373,7 +388,71 @@ a {
 	/*box-shadow: inset 0 .5em .5em rgba(0, 0, 0, .1);*/
 }
 
+.about-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+.about-text {
+	width: 45%;
+}
+@media(max-width: 767px) {
+	.about-wrapper {
+		flex-flow: column wrap;
+		justify-content: center;
+	}
+	.about-text {
+		width: 100%;
+		padding: 10%
+	}
+}
+
+
+
+.proposal_table_wrapper {
+	border-radius: 10px;
+	border: 1px solid #160f1f;
+	width: 100%;
+}
+.proposal_table {
+	text-align: left;
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9em;
+}
+.proposal_table thead tr {
+	font-style: italic;
+	background-color: var(--table-dark-color);
+}
+/* apply padding and bottom border to every cell */
+.proposal_table th,
+.proposal_table td{
+	padding: 0.5em;
+}
+/* make every other row a different color */
+.proposal_table tbody tr {
+	background-color: var(--table-dark-color);
+}
+.proposal_table tbody tr:nth-of-type(odd) {
+	background-color: var(--table-light-color);
+}
+
 /* everything related to the songs table */
+/* the colors for every state
+1-Bad
+2-Could be better..
+3-Ok
+4-Great
+5-not done yet */
+.state-1 {color:#FF1F1F;}
+.state-1-background {background-color:#FF1F1F; border-radius: 50%;}
+.state-2 {color:#FFA938;}
+.state-2-background {background-color:#FFA938;}
+.state-3 {color: #F9FF53;}
+.state-3-background {background-color:#F9FF53;}
+.state-4 {color: #2CF34A;}
+.state-4-background {background-color:#2CF34A;}
+.state-5 {color: #797979;}
+
 .table_wrapper {
 	overflow: scroll;
 	overflow-y: scroll;
@@ -385,8 +464,6 @@ a {
 	width: max(100%, 65rem);
 	border-collapse: collapse;
 	font-size: 0.9em;
-	--table-dark-color: #160f1fb6;
-	--table-light-color: #22192eb6;
 }
 /* make the table head italic and dark */
 .songs_table thead tr {
@@ -408,13 +485,13 @@ a {
 }
 /* acommodate for phone users */
 .songs_table thead th:first-of-type {
-	background-color: #160f1f;
+	background-color: var(--table-dark-notransp);
 }
 .songs_table tbody tr th {
-	background-color: #160f1f;
+	background-color: var(--table-dark-notransp);
 }
 .songs_table tbody tr:nth-of-type(odd) th {
-	background-color: #22192e;
+	background-color: var(--table-light-notransp);
 }
 .songs_table th:first-child {
 	position: sticky;
@@ -422,6 +499,59 @@ a {
 	border-inline-end: none;
 	width: 10%;
 }
+/*still in the songs page*/
+.settings_bar {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	list-style-type: none;
+}
+/* to make the add song button float to the left */
+.settings_bar li:first-child {
+	float: left;
+}
+.settings_bar li {
+	float: right;
+	margin-left: 5px;
+}
+#form-searchsong {
+	display: flex;
+	width: 100%;
+	align-items: baseline;
+}
+#form-searchsong .field-song-state label {
+	display: none;
+}
+/*make the search input area have no round edged to the right*/
+#form-searchsong .field-song-title input{
+	border-radius: 5px 0px 0px 5px;
+}
+#form-searchsong .field-proposal-title input{
+	border-radius: 5px 0px 0px 5px;
+}
+#form-searchsong .field-publicproposal-title input{
+	border-radius: 5px 0px 0px 5px;
+}
+/*make the search button have no round edged to the left*/
+#form-searchsong .search_button {
+	border-radius: 0px 5px 5px 0px;
+}
+.field-is-in-concert-checkbox {
+	display: flex;
+}
+.field-is-in-concert-checkbox .form-check {
+	margin: auto;
+}
+.field-song-setlist_spot {
+	float: right;
+}
+@media(max-width:767px) {
+	.settings_bar li {
+		float: left;
+		padding-bottom: 5px;
+	}
+}
+
 
 .background {
 	position:fixed;
@@ -448,10 +578,23 @@ a {
 	left: 50%;
 	transform: translate(-50%, -50%);
 	padding: 20px;
-	background-color: #fff;
+	background: rgb(34,25,46);
+	background: linear-gradient(234deg, rgba(34,25,46,1) 0%, rgba(22,15,31,1) 100%);
 	border: 1px solid #ccc;
 	z-index: 999;
 	border-radius: 10px;
+}
+@media(max-width: 767px) {
+	.popup {
+		width: 100%;
+		top: 0%;
+		transform: translate(-50%, 0);
+	}
+}
+.group_together {
+	display: flex;
+	justify-content: space-between;
+	gap: 5px;
 }
 .overlay_opaque {
 	display: none;

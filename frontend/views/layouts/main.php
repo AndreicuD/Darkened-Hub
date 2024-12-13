@@ -68,6 +68,8 @@ VANTA.FOG({
     } else {
         $menuItems = [
             ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Public Proposals', 'url' => ['/song/public_proposals']],
+            ['label' => 'Proposals', 'url' => ['/song/proposals']],
             ['label' => 'Concert', 'url' => ['/song/concert']],
             ['label' => 'Songs', 'url' => ['/song/index']],
         ];

@@ -3,6 +3,8 @@
 /** @var yii\web\View $this */
 
 use yii\helpers\Html;
+use yii\bootstrap5\ActiveForm;
+use yii\widgets\ListView;
 $this->registerJsFile('/js/clock.js', ['depends' => [\yii\web\JqueryAsset::class]]);
 
 $this->title = 'Concerts';
@@ -17,17 +19,80 @@ $this->title = 'Concerts';
         <h2 class="page_title" id="date">DATE</h2>
     </div>
     <hr>
-
+    
+    <div class="about-wrapper">
+        <div class="about-text">
+            <h3 class="page_title">Proposals/Propuneri:</h3>
+            <?php $form = ActiveForm::begin([
+                    'id' => 'form-addpublicproposal',
+                    'layout' => 'floating',
+                    'action' => ['song/createpublicproposal'], // Specify the route to the create action
+                    'method' => 'post',
+                ]); ?>
+        
+                <?= $form->errorSummary($model);?>
+                
+                <div class="group_together">
+                    <?= $form->field($model, 'title')->label(Yii::t('app', 'Title')) ?>
+                    <?= $form->field($model, 'artist')->label(Yii::t('app', 'Artist')) ?>
+                </div>
+                <?= $form->field($model, 'info')->textarea(['rows' => 2, 'style' => 'min-height: 80px']) ?>
+                
+                <br>
+                <div style="width: 100%; text-align: center;">
+                    <input type="submit" value="Save" class="btn btn-primary">
+                </div>
+            <?php ActiveForm::end(); ?>
+        </div>
+        <div class="about-text">
+            <h3 class="page_title">Latest proposed:</h3>
+            <div class="proposal_table_wrapper">       
+                <table class="proposal_table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Title</th>
+                            <th scope="col">Artist</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?= ListView::widget([
+                            'dataProvider' => $dataProvider,
+                            'itemView' => '_proposal_item',
+                            'viewParams' => [],
+                            'options' => [
+                                'class' => 'song_in_table',
+                            ],
+                            'itemOptions' => [
+                                'tag' => 'tr',
+                                'class' => 'song_in_table',
+                            ],
+                            'layout' => '{items}{pager}',
+                            'pager' => [
+                                'pageCssClass' => 'page-item',
+                                'prevPageCssClass' => 'prev page-item',
+                                'nextPageCssClass' => 'next page-item',
+                                'firstPageCssClass' => 'first page-item',
+                                'lastPageCssClass' => 'last page-item',
+                                'linkOptions' => ['class' => 'page-link'],
+                                'disabledListItemSubTagOptions' => ['class' => 'page-link'],
+                                'options' => ['class' => 'pagination justify-content-center'],
+                            ],
+                        ]); ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!--
     <div id="slideshow" class="carousel slide" data-bs-ride="carousel">
 
-        <!-- Indicators/dots -->
         <div class="carousel-indicators">
         <button type="button" data-bs-target="#slideshow" data-bs-slide-to="0" class="active carousel-control"></button>
         <button type="button" data-bs-target="#slideshow" data-bs-slide-to="1"></button>
         <button type="button" data-bs-target="#slideshow" data-bs-slide-to="2"></button>
         </div>
 
-        <!-- The slideshow/carousel -->
         <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="../frontend/web/img/concert-photos/IMG_7787.jpg" class="d-block w-100">
@@ -40,12 +105,12 @@ $this->title = 'Concerts';
         </div>
         </div>
 
-        <!-- Left and right controls/icons -->
         <button class="carousel-control-prev" type="button" data-bs-target="#slideshow" data-bs-slide="prev">
         <span class="carousel-control-prev-icon carousel-control"></span>
         </button>
         <button class="carousel-control-next" type="button" data-bs-target="#slideshow" data-bs-slide="next">
         <span class="carousel-control-next-icon carousel-control"></span>
         </button>
+        -->
     </div>
 </div>

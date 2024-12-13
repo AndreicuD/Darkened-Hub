@@ -3,10 +3,9 @@
 namespace frontend\controllers;
 
 use frontend\models\ContactForm;
+use common\models\PublicProposal;
 use Yii;
 use yii\web\Controller;
-use common\models\Chime;
-use common\models\ChimeLike;
 
 /**
  * Site controller
@@ -56,7 +55,12 @@ class SiteController extends Controller
      */
     public function actionConcerts()
     {
-        return $this->render('concerts');
+        $model = new PublicProposal();
+        $dataProvider = $model->searchLatest();
+        return $this->render('concerts', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
