@@ -3,10 +3,10 @@
 namespace frontend\controllers;
 
 use frontend\models\ContactForm;
+use common\models\PublicProposal;
+use common\models\Concert;
 use Yii;
 use yii\web\Controller;
-use common\models\Chime;
-use common\models\ChimeLike;
 
 /**
  * Site controller
@@ -56,7 +56,17 @@ class SiteController extends Controller
      */
     public function actionConcerts()
     {
-        return $this->render('concerts');
+        $model = new PublicProposal();
+        $dataProvider = $model->searchLatest();
+
+        $concert = new Concert();
+        $concert_date = $concert->get_date(1);
+
+        return $this->render('concerts', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+            'concert_date' => $concert_date,
+        ]);
     }
 
     /**

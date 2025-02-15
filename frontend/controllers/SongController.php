@@ -2,15 +2,16 @@
 
 namespace frontend\controllers;
 
-use common\models\User;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use common\models\Song;
 use yii\web\Response;
 
+use common\models\User;
+use common\models\Song;
+use common\models\Concert;
 /**
  * Song controller
  */
@@ -23,7 +24,9 @@ class SongController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['index', 'concert'],
+                        'actions' => [
+                            'index', 'concert', 'create', 'update', 'delete', 'edit',
+                        ],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -52,7 +55,7 @@ class SongController extends Controller
      *
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($title = null)
     {
         $searchModel = new Song();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -60,9 +63,12 @@ class SongController extends Controller
         $dataProvider->pagination->forcePageParam = 0;
         $dataProvider->pagination->defaultPageSize = 12;
 
+        $user = new User();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'user' => $user,
         ]);
     }
 
@@ -70,13 +76,77 @@ class SongController extends Controller
     {
         $searchModel = new Song();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere(['is_in_concert' => 1]);
         $dataProvider->pagination->pageParam = 'p';
         $dataProvider->pagination->forcePageParam = 0;
         $dataProvider->pagination->defaultPageSize = 12;
 
+        $user = new User();
+ 
         return $this->render('concert', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'user' => $user,
         ]);
+    }
+    
+    public function actionCreate()
+    {   
+        $model = new Song();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                if ($model->save()) {
+                    Yii::$app->session->setFlash('success', 'Melodie creata cu succes.');
+                    return $this->redirect(['song/index']);
+                } else {
+                    Yii::$app->session->setFlash('error', 'Nu s-a reusit crearea melodiei.');
+                }
+            } else {
+                Yii::$app->session->setFlash('error', 'Validation failed: ' . json_encode($model->getErrors()));
+            }
+        } else {
+            Yii::$app->session->setFlash('error', 'Failed to load form data.');
+        }
+
+        return $this->redirect(['song/index']);
+    }
+    public function actionEdit($id, $page) {
+        $searchModel = Song::findOne(['id' => $id]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageParam = 'p';
+        $dataProvider->pagination->forcePageParam = 0;
+        $dataProvider->pagination->defaultPageSize = 12;
+
+        $user = new User();
+
+        return $this->render('edit', [
+            'model' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'user' => $user,
+            'page' => $page,
+        ]);
+    }
+    public function actionUpdate($id, $page = 'index'): Response|string
+    {
+        $model = Song::findOne(['id' => $id]);
+        //$model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Melodia a fost modificata.');
+            $this->redirect(['song/' . $page]);
+        } else {
+            Yii::$app->session->setFlash('error', 'A aparut o eroare in salvarea melodiei.');
+        }
+
+        return $this->redirect(['song/' . $page]);
+    }
+    public function actionDelete($id)
+    {
+        $model = Song::findOne(['id' => $id]);
+        if ($model->delete()) {
+            Yii::$app->session->setFlash('success', 'Melodia a fost stearsa.');
+        }
+
+        $this->redirect(['song/index']);
     }
 }

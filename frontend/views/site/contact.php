@@ -8,31 +8,33 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\captcha\Captcha;
 
-$this->title = 'Contact';
+$this->title = Yii::t('app', 'Contact Us');
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
     <h1 class="page_title" style="text-align: center;"><?= Html::encode($this->title) ?></h1>
 
     <p class="text-center lead">
-        <?= Yii::t("app", "For any questions regarding what we do, please contact us by filling the form or by using any of the social media linked below. Thank you.") ?>
+        <?= Yii::t("app", "Pentru orice întrebare contactează-ne prin formularul de mai jos sau folosind unul din social media-urile listate.") ?>
     </p>
 
     <div class="row justify-content-center">
         <div style="display: inline; text-align: center; padding-bottom: 1rem; font-size: 2em;">
-            <a href="https://www.instagram.com/darkened_tunes/" target="_blank" style="color: #ffffff; text-decoration: none;"><i class="fa fa-instagram fa-lg"></i> - Instagram</a>
+            <a href="https://www.instagram.com/darkened_tunes/" target="_blank" style="color: #ffffff; text-decoration: none;" class="page_title">
+                <i class="fa fa-instagram fa-lg"></i> - Instagram
+            </a>
         </div>
 
         <div class="col-lg-6">
             <?php $form = ActiveForm::begin(['id' => 'contact-form', 'layout' => 'floating']); ?>
 
-                <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'name')->textInput(['autofocus' => true])->label(Yii::t('app', 'Nume')) ?>
 
-                <?= $form->field($model, 'email') ?>
+                <?= $form->field($model, 'email')->label(Yii::t('app', 'Email')) ?>
 
-                <?= $form->field($model, 'subject') ?>
+                <?= $form->field($model, 'subject')->label(Yii::t('app', 'Subiect')) ?>
 
-                <?= $form->field($model, 'body')->textarea(['rows' => 6, 'style' => 'min-height: 160px']) ?>
+                <?= $form->field($model, 'body')->textarea(['rows' => 6, 'style' => 'min-height: 160px'])->label(Yii::t('app', 'Ce vrei sa ne spui?')) ?>
 
                 <?= $form->field($model, 'verifyCode')->widget(Captcha::class, [
                     'template' => '<div class="row"><div class="col-lg-3 justify" style="text-align: center;">{image}</div><div style = "padding-top: 1rem;" class="col-lg-6">{input}</div></div>',

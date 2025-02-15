@@ -53,8 +53,6 @@ return [
                 'about' => 'site/about',
                 'contact' => 'site/contact',
                 'concerts' => 'site/concerts',
-                'songs' => 'song/index',
-                'concert' => 'song/concert',
             ],
             'normalizer' => [
                 'class' => 'yii\web\UrlNormalizer',
