@@ -455,6 +455,10 @@ a.desc:after {
 	text-shadow: 0px 0px 30px #3c3863;
 	font-weight: bold;
 }
+.glow_text {
+	text-shadow: 0px 0px 30px #3c3863;
+	font-weight: bold;
+}
 
 .hero {
 	position: absolute;
@@ -651,6 +655,59 @@ a.desc:after {
 	width: 10%;
 	font-weight: bold;
 }
+/*still in the songs page*/
+.settings_bar {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	list-style-type: none;
+}
+/* to make the add song button float to the left */
+.settings_bar li:first-child {
+	float: left;
+}
+.settings_bar li {
+	float: right;
+	margin-left: 5px;
+}
+#form-searchsong {
+	display: flex;
+	width: 100%;
+	align-items: baseline;
+}
+#form-searchsong .field-song-state label {
+	display: none;
+}
+/*make the search input area have no round edged to the right*/
+#form-searchsong .field-song-title input{
+	border-radius: 5px 0px 0px 5px;
+}
+#form-searchsong .field-proposal-title input{
+	border-radius: 5px 0px 0px 5px;
+}
+#form-searchsong .field-publicproposal-title input{
+	border-radius: 5px 0px 0px 5px;
+}
+/*make the search button have no round edged to the left*/
+#form-searchsong .search_button {
+	border-radius: 0px 5px 5px 0px;
+}
+.field-is-in-concert-checkbox {
+	display: flex;
+}
+.field-is-in-concert-checkbox .form-check {
+	margin: auto;
+}
+.field-song-setlist_spot {
+	float: right;
+}
+@media(max-width:767px) {
+	.settings_bar li {
+		float: left;
+		padding-bottom: 5px;
+	}
+}
+
 
 
 /* PROPOSAL TABLE */
