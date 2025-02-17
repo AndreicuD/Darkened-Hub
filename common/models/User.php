@@ -34,8 +34,6 @@ use yii\db\Expression;
  * @property string $full_name the full name
  * @property integer $page_size
  *
- * @property Chime[] $chimes
- * @property ChimeLike[] $chimeLikes
  * @property AuthAssignment $role
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -66,12 +64,12 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules(): array
     {
         return [
-            [['email', 'firstname', 'lastname'], 'required', 'on' => 'default'],
-            [['email', 'firstname', 'lastname', 'password'], 'required', 'on' => 'create'],
+            [['email', 'username'], 'required', 'on' => 'default'],
+            [['email', 'username', 'password'], 'required', 'on' => 'create'],
             ['status', 'default', 'value' => self::STATUS_INACTIVE, 'on' => 'default'],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
             ['sex' , 'in', 'range' => ['F', 'M']],
-            [['sex', 'birth_date', 'username'], 'default', 'value' => NULL],
+            [['sex', 'birth_date', 'firstname', 'lastname'], 'default', 'value' => NULL],
             [['item_name'], 'default', 'value' => 'member', 'on' => 'create'],
             [['firstname', 'lastname', 'username'], 'string', 'max' => 254],
             [['phone'], 'string', 'max' => 128],
@@ -79,8 +77,8 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'email', 'on' => 'create'],
             ['email', 'unique', 'on' => 'default'],
             ['email', 'unique', 'on' => 'create'],
-            ['username', 'unique', 'skipOnEmpty' => true, 'on' => 'default'],
-            ['username', 'unique', 'skipOnEmpty' => true, 'on' => 'create'],
+            [['firstname', 'lastname'], 'unique', 'skipOnEmpty' => true, 'on' => 'default'],
+            [['firstname', 'lastname'], 'unique', 'skipOnEmpty' => true, 'on' => 'create'],
             /*['password_confirmation', 'compare', 'compareAttribute' => 'new_password', 'on' => 'create'],*/
             [['auth_key', 'password_hash', 'password_reset_token', 'verification_token', 'password', 'newsletter_subscription'], 'safe'],
             [['id', 'username', 'email', 'firstname', 'lastname', 'sex', 'phone', 'birth_date', 'item_name'], 'safe', 'on' => 'search'],
@@ -151,14 +149,6 @@ class User extends ActiveRecord implements IdentityInterface
     public function getRoleName(): string
     {
         return $this->role->item_name ?? 'member';
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getChimes()
-    {
-        return $this->hasMany(Chime::class, ['user_id' => 'id']);
     }
 
     /**
@@ -267,8 +257,6 @@ class User extends ActiveRecord implements IdentityInterface
 
         return $dataProvider;
     }
-
-
 
     /**
      * {@inheritdoc}

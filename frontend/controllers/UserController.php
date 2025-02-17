@@ -8,13 +8,13 @@ use Yii;
 use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\Response;
 use yii\filters\AccessControl;
 use frontend\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
-use common\models\Chime;
-use common\models\ChimeLike;
+use common\models\User;
 
 /**
  * Site controller
@@ -57,6 +57,13 @@ class UserController extends Controller
             ],
         ];
     }
+
+    /**
+     * Searches for users based on the term sent via AJAX.
+     *
+     * @param string $term The search term from the user input.
+     * @return array JSON response with matching usernames.
+     */
 
     /**
      * Displays homepage.
