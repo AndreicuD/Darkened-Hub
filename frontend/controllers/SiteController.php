@@ -3,10 +3,11 @@
 namespace frontend\controllers;
 
 use frontend\models\ContactForm;
+use common\models\PublicProposal;
+use common\models\Concert;
+use common\models\Announcement;
 use Yii;
 use yii\web\Controller;
-use common\models\Chime;
-use common\models\ChimeLike;
 
 /**
  * Site controller
@@ -36,7 +37,24 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = new PublicProposal();
+        $dataProvider = $model->searchLatest();
+
+        $concert = new Concert();
+        $concertModel = Concert::findOne(['id' => 1]);
+        $concert_date = $concert->get_date(1);
+
+        $announcement = new Announcement();
+        $data_announcement = $announcement->searchLatest(3);
+
+        $this->layout = "index_layout";
+        return $this->render('index', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+            'concertModel' => $concertModel,
+            'concert_date' => $concert_date,
+            'data_announcement' => $data_announcement
+        ]);
     }
 
     /**
@@ -56,7 +74,18 @@ class SiteController extends Controller
      */
     public function actionConcerts()
     {
-        return $this->render('concerts');
+        $model = new PublicProposal();
+        $dataProvider = $model->searchLatest();
+
+        $concert = Concert::findOne(['id' => 1]);
+        $concert_date = $concert->get_date(1);
+
+        return $this->render('concerts', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+            'concertModel' => $concert,
+            'concert_date' => $concert_date,
+        ]);
     }
 
     /**
@@ -69,9 +98,9 @@ class SiteController extends Controller
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
+                Yii::$app->session->setFlash('success', 'Mulțumim că ne-ai contactat. O să-ți răspundem în cel mai scurt timp posibil.');
             } else {
-                Yii::$app->session->setFlash('error', 'There was an error sending your message.');
+                Yii::$app->session->setFlash('error', 'A apărut o eroare. Mesajul nu a fost transmis.');
             }
 
             return $this->refresh();

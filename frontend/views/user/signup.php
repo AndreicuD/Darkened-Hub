@@ -1,10 +1,7 @@
 <?php
 
 /** @var yii\web\View $this */
-/** @var yii\bootstrap5\ActiveForm $form */
-/** @var SignupForm $model */
 
-use frontend\models\SignupForm;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
@@ -14,7 +11,7 @@ $this->title = Yii::t('app', 'Signup');
 <div class="site-signup">
     <h1 class="text-center page_title"><?= Html::encode($this->title) ?></h1>
 
-    <p class="text-center text-danger lead"><?= Yii::t('app', "This won't do anything if you aren't in the club.") ?></p>
+    <!--<p class="text-center text-danger lead"><?= Yii::t('app', "This won't do anything if you aren't in the club.") ?></p>-->
     <p class="text-center text-danger lead"><?= Yii::t('app', "Daca nu esti din club, incerci degeaba.") ?></p>
 
     <div class="row justify-content-center">
@@ -24,15 +21,7 @@ $this->title = Yii::t('app', 'Signup');
                 <?= $form->field($model, 'email')->label(Yii::t('app', 'Email')) ?>
                 <?= $form->field($model, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
 
-                <?= $form->field($model, 'firstname')->label(Yii::t('app', 'Username')) ?>
-                <!--<?= $form->field($model, 'lastname')->label(Yii::t('app', 'Lastname')) ?>-->
-                <!--<?= $form->field($model, 'sex')->dropDownList(\common\models\User::sexList(), ['prompt' => Yii::t('app', 'Select the sex ...')]); ?>-->
-                <!--<?= $form->field($model, 'birth_date', ['inputOptions' => ['type' => 'date']])->label(Yii::t('app', 'Birth date')); ?>-->
-
-                <!--<hr>-->
-
-                
-                <!--<?= $form->field($model, 'phone')->textInput()->label(Yii::t('app', 'Phone')); ?>-->
+                <?= $form->field($model, 'username')->label(Yii::t('app', 'Username')) ?>
 
                 <br>
                 <div class="form-group" style="text-align: center;">
