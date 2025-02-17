@@ -432,6 +432,8 @@ a.desc:after {
 	border: 1px solid #ccc;
 	z-index: 999;
 	border-radius: 10px;
+	border: 1px solid #160f1f;
+	width: 100%;
 }
 @media(max-width: 767px) {
 	.popup {
