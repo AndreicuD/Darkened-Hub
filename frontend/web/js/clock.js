@@ -35,11 +35,10 @@ function getTime() {
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     // Display the result in the element with id="clock"
     if(document.getElementById("clock")) {
-        document.getElementById("clock").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        document.getElementById("clock").innerHTML = `${days}d ${hours}h ${minutes}m`;
     }
 
     // If the count down is finished
@@ -49,7 +48,6 @@ function getTime() {
 }
 
 function setDate(string) {
-    console.log('timp setat');
     if (string) {
         date = new Date(string);
         if(document.getElementById("date")) {
@@ -70,7 +68,7 @@ function no_concert() {
         document.getElementById("date").style = "display:none;";
     }
     if(document.getElementById("clock")) {
-        document.getElementById("clock").innerHTML = "Următorul concert nu a fost încă anunțat.";
+        document.getElementById("clock").innerHTML = "Următorul concert nu a fost încă anunțat 🫤";
         document.getElementById("clock").style = "font-size: 2rem;";
     }
 }

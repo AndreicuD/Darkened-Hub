@@ -110,7 +110,7 @@ $current_page = $page;
 <div id="addproposal_popup">
     <div class="overlay_opaque" onclick="closePopup('addproposal_popup')"></div>
     <div class="popup">
-        <h1 class="page_title"><?= Yii::t('app', 'Adauga Propunere') ?></h1>
+        <h1 class="page_title"><?= Yii::t('app', 'Adaugă Propunere') ?></h1>
         <?php $form = ActiveForm::begin([
                 'id' => 'form-addpublicproposal',
                 'type' => ActiveForm::TYPE_FLOATING,
@@ -131,13 +131,13 @@ $current_page = $page;
             <div class="container text-center">
                 <div class="row">
                     <div class="col">
-                        <button onclick="closePopup('addproposal_popup')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Inchide') ?></button>
+                        <button onclick="closePopup('addproposal_popup')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Închide') ?></button>
                     </div>
                     <div class="col">
-                        <input type="reset" value="Reseteaza" class="btn btn-warning">
+                        <input type="reset" value="Resetează" class="btn btn-warning">
                     </div>
                     <div class="col">
-                        <input type="submit" value="Salveaza" class="btn btn-success">
+                        <input type="submit" value="Salvează" class="btn btn-success">
                     </div>
                 </div>
             </div>

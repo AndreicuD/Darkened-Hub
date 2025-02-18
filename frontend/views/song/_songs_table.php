@@ -130,7 +130,7 @@ $current_page = $page;
 <div id="addsong_popup">
     <div class="overlay_opaque" onclick="closePopup('addsong_popup')"></div>
     <div class="popup">
-        <h1 class="page_title"><?= Yii::t('app', 'Adauga Melodie') ?></h1>
+        <h1 class="page_title"><?= Yii::t('app', 'Adaugă Melodie') ?></h1>
         <?php $form = ActiveForm::begin([
             'id' => 'form-addsong',
             'type' => ActiveForm::TYPE_FLOATING,
@@ -207,9 +207,9 @@ $current_page = $page;
                 'uncheck' => '0',
                 'value' => '1',
                 'id' => 'is-in-concert-checkbox', // Add an ID for targeting with JS
-            ])->label(Yii::t('app', 'E in concert?')); ?>
+            ])->label(Yii::t('app', 'E în concert?')); ?>
             
-            <?= $form->field($searchModel, 'setlist_spot')->label(Yii::t('app', 'Spot in Setlist')); ?>
+            <?= $form->field($searchModel, 'setlist_spot')->label(Yii::t('app', 'Loc în Setlist')); ?>
             <?= $form->field($searchModel, 'state')->dropDownList([
                 '5' => $searchModel::stateList()['5'], // Gray for "Not done yet"
                 '4' => $searchModel::stateList()['4'],   // Green for "Great"
@@ -227,13 +227,13 @@ $current_page = $page;
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <button onclick="closePopup('addsong_popup')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Inchide') ?></button>
+                    <button onclick="closePopup('addsong_popup')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Închide') ?></button>
                 </div>
                 <div class="col">
-                    <input type="reset" value="Reseteaza" class="btn btn-warning">
+                    <input type="reset" value="Resetează" class="btn btn-warning">
                 </div>
                 <div class="col">
-                    <input type="submit" value="Salveaza" class="btn btn-success">
+                    <input type="submit" value="Salvează" class="btn btn-success">
                 </div>
             </div>
         </div>

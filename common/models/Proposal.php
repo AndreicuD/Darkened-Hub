@@ -13,7 +13,7 @@ use yii\db\Expression;
  * @property integer $id [int(11) unsigned (auto increment)]
  * @property string $title [varchar(254)]
  * @property string $artist [varchar(254)]
- * @property string $username
+ * @property string $username [varchar(254)]
  * @property string $info [varchar(254)]
  * @property integer $created_at [datetime]
  * @property integer $updated_at [timestamp = current_timestamp()]

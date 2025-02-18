@@ -12,6 +12,8 @@ use yii\db\Expression;
  *
  * @property integer $id [int(auto increment)]
  * @property string $date [varchar(254)]
+ * @property string $title [varchar(254)]
+ * @property string $description [varchar(1000)]
  */
 class Concert extends \yii\db\ActiveRecord
 {
@@ -30,8 +32,8 @@ class Concert extends \yii\db\ActiveRecord
     {
         return [
             [['date'], 'required'],
-            [['id', 'date'], 'safe'],
-            [['id', 'date'], 'safe', 'on' => 'search'],
+            [['id', 'date', 'title', 'description'], 'safe'],
+            [['id', 'date', 'title', 'description'], 'safe', 'on' => 'search'],
         ];
     }
 
@@ -42,6 +44,8 @@ class Concert extends \yii\db\ActiveRecord
     {
         return [
             'date' => Yii::t('app', 'Date'),
+            'title' => Yii::t('app', 'Title'),
+            'description' => Yii::t('app', 'Description'),
         ];
     }
 

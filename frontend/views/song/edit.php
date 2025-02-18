@@ -82,9 +82,9 @@ $this->title = Yii::t('app', 'Update Melodie');
             'uncheck' => '0',
             'value' => '1',
             'id' => 'is-in-concert-checkbox', // Add an ID for targeting with JS
-        ])->label(Yii::t('app', 'E in concert?')); ?>
+        ])->label(Yii::t('app', 'E în concert?')); ?>
         
-        <?= $form_update->field($model, 'setlist_spot')->label(Yii::t('app', 'Spot in Setlist')); ?>
+        <?= $form_update->field($model, 'setlist_spot')->label(Yii::t('app', 'Loc în Setlist')); ?>
         <?= $form_update->field($model, 'state')->dropDownList([
             '5' => $model::stateList()['5'], // Gray for "Not done yet"
             '4' => $model::stateList()['4'],   // Green for "Great"
@@ -101,10 +101,10 @@ $this->title = Yii::t('app', 'Update Melodie');
     <div class="container text-center">
         <div class="row">
             <div class="col">
-            <?=Html::a('Cancel', Url::to(['song/' . $page]), ['class' => 'btn btn-danger']); ?>
+            <?=Html::a('Anulează', Url::to(['song/' . $page]), ['class' => 'btn btn-danger']); ?>
             </div>
             <div class="col">
-                <input type="submit" value="Salveaza Modificari" class="btn btn-success">
+                <input type="submit" value="Salvează Modificări" class="btn btn-success">
             </div>
         </div>
     </div>

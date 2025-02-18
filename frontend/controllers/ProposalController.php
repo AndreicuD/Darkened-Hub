@@ -99,16 +99,16 @@ class ProposalController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->save()) {
-                    Yii::$app->session->setFlash('success', 'Propunere creata cu succes.');
+                    Yii::$app->session->setFlash('success', 'Propunere creată cu succes.');
                     return $this->redirect(['site/concerts']);
                 } else {
-                    Yii::$app->session->setFlash('error', 'Nu s-a reusit crearea propunerii.');
+                    Yii::$app->session->setFlash('error', 'Nu s-a reușit crearea propunerii.');
                 }
             } else {
-                Yii::$app->session->setFlash('error', 'Validation failed: ' . json_encode($model->getErrors()));
+                Yii::$app->session->setFlash('error', 'Validare eșuată: ' . json_encode($model->getErrors()));
             }
         } else {
-            Yii::$app->session->setFlash('error', 'Failed to load form data.');
+            Yii::$app->session->setFlash('error', 'Încercarea de preluare a informației din formular a eșuat.');
         }
 
         return $this->redirect(['site/concerts']);
@@ -121,16 +121,16 @@ class ProposalController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->save()) {
-                    Yii::$app->session->setFlash('success', 'Propunere creata cu succes.');
+                    Yii::$app->session->setFlash('success', 'Propunere creată cu succes.');
                     return $this->redirect(['proposal/proposals']);
                 } else {
-                    Yii::$app->session->setFlash('error', 'Nu s-a reusit crearea propunerii.');
+                    Yii::$app->session->setFlash('error', 'Nu s-a reușit crearea propunerii.');
                 }
             } else {
-                Yii::$app->session->setFlash('error', 'Validation failed: ' . json_encode($model->getErrors()));
+                Yii::$app->session->setFlash('error', 'Validare eșuată: ' . json_encode($model->getErrors()));
             }
         } else {
-            Yii::$app->session->setFlash('error', 'Failed to load form data.');
+            Yii::$app->session->setFlash('error', 'Încercarea de preluare a informației din formular a eșuat.');
         }
 
         return $this->redirect(['proposal/proposals']);
@@ -141,10 +141,10 @@ class ProposalController extends Controller
         $model = PublicProposal::findOne(['id' => $id]);
         //$model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Propunerea a fost modificata.');
+            Yii::$app->session->setFlash('success', 'Propunerea a fost modificată.');
             $this->redirect(['proposal/public_proposals']);
         } else {
-            Yii::$app->session->setFlash('error', 'A aparut o eroare in salvarea melodiei.');
+            Yii::$app->session->setFlash('error', 'A apărut o eroare în salvarea melodiei.');
         }
 
         return $this->redirect(['proposal/public_proposals']);
@@ -154,10 +154,10 @@ class ProposalController extends Controller
         $model = Proposal::findOne(['id' => $id]);
         //$model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Propunerea a fost modificata.');
+            Yii::$app->session->setFlash('success', 'Propunerea a fost modificată.');
             $this->redirect(['proposal/proposals']);
         } else {
-            Yii::$app->session->setFlash('error', 'A aparut o eroare in salvarea melodiei.');
+            Yii::$app->session->setFlash('error', 'A apărut o eroare în salvarea melodiei.');
         }
 
         return $this->redirect(['proposal/proposals']);
@@ -166,7 +166,7 @@ class ProposalController extends Controller
     {
         $model = PublicProposal::findOne(['id' => $id]);
         if ($model->delete()) {
-            Yii::$app->session->setFlash('success', 'Propunerea a fost stearsa.');
+            Yii::$app->session->setFlash('success', 'Propunerea a fost ștearsă.');
         }
 
         $this->redirect(['proposal/public_proposals']);
@@ -175,7 +175,7 @@ class ProposalController extends Controller
     {
         $model = Proposal::findOne(['id' => $id]);
         if ($model->delete()) {
-            Yii::$app->session->setFlash('success', 'Propunerea a fost stearsa.');
+            Yii::$app->session->setFlash('success', 'Propunerea a fost ștearsă.');
         }
 
         $this->redirect(['proposal/proposals']);

@@ -28,22 +28,30 @@ class ConcertController extends Controller
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return mixed
-     */
     public function actionUpdateconcertdate($id)
     {
         $model = Concert::findOne(['id' => $id]);
         //$model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Data concertului a fost modificata.');
-            $this->redirect(['calendar/index']);
+            Yii::$app->session->setFlash('success', 'Data concertului a fost modificată.');
+            $this->redirect(['announcement/index']);
         } else {
-            Yii::$app->session->setFlash('error', 'A aparut o eroare in salvarea datei concertului.');
+            Yii::$app->session->setFlash('error', 'A apărut o eroare în salvarea datei concertului.');
         }
 
-        return $this->redirect(['calendar/index']);
+        return $this->redirect(['announcement/index']);
+    }
+    public function actionUpdateconcertinfo($id)
+    {
+        $model = Concert::findOne(['id' => $id]);
+        //$model = $this->findModel($id);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', 'Informațiile concertului au fost modificate.');
+            $this->redirect(['announcement/index']);
+        } else {
+            Yii::$app->session->setFlash('error', 'A apărut o eroare în salvarea informațiilor concertului.');
+        }
+
+        return $this->redirect(['announcement/index']);
     }
 }

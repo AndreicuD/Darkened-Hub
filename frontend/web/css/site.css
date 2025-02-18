@@ -2,6 +2,7 @@
 [data-bs-theme=light] {
 	--primary-color: #7c759b;
 	--primary-darker: #666081;
+	--site-purple: #3c3366;
 	--secondary-color: #76ccee;
 	--secondary-darker: #a76c1f;
 	--bs-blue: #0d6efd;
@@ -210,7 +211,22 @@
 	color: var(--bs-dropdown-color);
 	text-align: left;
 	list-style: none;
-  }
+}
+
+.alfa-font {
+	font-family: "Alfa Slab One", serif;
+	font-weight: 400;
+	font-style: normal;
+}  
+.noto-sans-500 {
+	font-family: "Noto Sans", serif;
+	font-optical-sizing: auto;
+	font-weight: 500;
+	font-style: normal;
+	font-variation-settings:
+	  "wdth" 100;
+}
+
 main > .container, main > .container-fluid {
     padding: 20px 15px 20px;
 }
@@ -233,10 +249,20 @@ main > .container, main > .container-fluid {
 
 /* NAVBAR AND HEADER/FOOTER SETTINGS */
 
+.navbar-index {
+	z-index: 100;
+	position: fixed;
+	top: -100%;
+	width: 100%;
+	transition: top 0.3s;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
 /* align the logout "link" (button in form) of the navbar */
-.navbar form > button.logout {
+.navbar .logout {
 	padding-top: 7px;
 	color: rgba(255, 255, 255, 0.5);
+	color: var(--primary-color) ! important;
 }
 header .navbar-brand {
 	padding: 0;
@@ -255,6 +281,9 @@ footer .footer {
 	font-size: .9em;
 	color: rgba(255, 255, 255, 0.55);
 	height: 60px;
+}
+.footer-love {
+	float: right;
 }
 .footer > .container, .footer > .container-fluid {
 	padding-right: 15px;
@@ -281,6 +310,10 @@ footer .footer {
 	}
 	.contact_map {
 		display: none;
+	}
+	.footer-love {
+		float: left;
+		padding-bottom: 1rem;
 	}
 }
 /* style breadcrumb widget as in previous bootstrap versions */
@@ -338,11 +371,15 @@ a.desc:after {
 
 /* ABOUT PAGE */
 .about-wrapper {
+	display: -ms-flexbox;
 	display: flex;
 	justify-content: space-between;
 }
 .about-text {
-	width: 45%;
+	width: 48%;
+}
+.about-padding {
+	padding: 0%;
 }
 @media(max-width: 767px) {
 	.about-wrapper {
@@ -351,7 +388,9 @@ a.desc:after {
 	}
 	.about-text {
 		width: 100%;
-		padding: 10%
+	}
+	.about-padding {
+		padding: 0% 5% 0% 5%;
 	}
 }
 
@@ -402,6 +441,7 @@ a.desc:after {
 	}
 }
 .group_together {
+	display: -ms-flexbox;
 	display: flex;
 	justify-content: space-between;
 	gap: 5px;
@@ -450,33 +490,306 @@ a.desc:after {
 	font-weight: bold;
 }
 .page_title {
-	padding: 20px;
+	padding: 20px 0;
 	text-align: center;
 	text-shadow: 0px 0px 30px #3c3863;
 	font-weight: bold;
 }
-.glow_text {
+.date_text {
+	padding: 1rem;
+	text-align: center;
 	text-shadow: 0px 0px 30px #3c3863;
 	font-weight: bold;
 }
+.clock_text {
+	font-size: 8vw;
+	padding-top: 1rem;
+	margin: 0;
+	line-height:0.99;
+}
+@media(max-width: 767px) {
+	.clock_text {
+		font-size: 10vw;
+		padding-bottom: 1rem;
+	}
+}
 
 .hero {
-	position: absolute;
-	-ms-transform: translateY(50%);
-	transform: translateY(50%);
+	background-image: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%), url("../frontend/web/img/hero.png");
+	background-color: black;
+	height: 100vh;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
 }
 .hero_title {
-	text-align: left;
+	text-align: center;
 	margin-left: 0;
 	padding-left: 0;
 	text-shadow: 0px 0px 30px #3c3863;
 	font-size: 10em;
 }
+.hero-text {
+	text-align: center;
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	transform: translateX(-50%);
+}
+@keyframes bob {
+	0% { transform:translateY(0%) scale(1); }
+	50% { transform:translateY(15%) scale(1.1); }
+	100% { transform:translateY(0%) scale(1); }
+}
+.down-arrow {
+	color: var(--site-purple);
+	animation: bob 1s infinite;
+}
+.section-title {
+	font-size: 60px;
+}
+.index-second-title {
+	text-align: center;
+}
+.flex-div {
+	width: 70%;
+	text-align: center;
+}
+.index-section {
+	padding: 5% 10% 5% 10%;
+	min-height: 500px;
+	display: -ms-flexbox;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.index-section .section-title {
+	text-align: center;
+}
+.index-section .section-text {
+	text-align: center;
+}
+
+.double-index-section {
+	justify-content: space-evenly;
+	flex-direction: row;
+}
+.double-index-section .flex-div {
+	width: 50%;
+	padding: 0 2% 0 2%;
+}
+.double-index-section .section-title {
+	text-align: right;
+}
+.double-index-section .section-text {
+	text-align: right;
+}
+.flex-div img {
+	width: 100%;
+	background-color: #000;
+}
+
+.about-us-index {
+	background-color: #000;
+}
+.about-us-index .section-title {
+	background: rgb(60,51,102);
+	background: linear-gradient(67deg, rgba(44,37,74,1) 0%, rgba(60,51,102,1) 30%, rgba(40,33,64,1) 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.about-us-index a {
+	float: right;
+}
+
+.about-us-index .section-text {
+	padding-left: 20%;
+}
+.concert-index {
+	flex-direction: column;
+	background: rgb(60,51,102);
+	background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(37, 32, 63, 0) 50%, rgba(0,0,0,1) 100%);
+}
+
+.announcement-index {
+	padding-top: 0%;
+}
+.announcement-div {
+	width: 33%;
+}
+.announcement {	
+	margin-bottom: 1em;
+	width: 100%;
+}
+.announcement-title {
+	background-color: var(--table-dark-color);
+	text-align: center;
+	margin-bottom: 0;
+	padding: 0.5em 0;
+	border-radius: 10px 10px 0 0;
+}
+.announcement-title-edit {
+	background-color: var(--table-dark-color);
+	text-align: left;
+	margin-bottom: 0;
+	padding: 0.5em;
+	border-radius: 10px 10px 0 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.announcement-title-edit button {
+	justify-content: flex-end;
+}
+
+.announcement-hr {
+	margin: 0;
+	padding: 0;
+}
+.announcement-body {
+	padding: 0;
+	margin: 0;
+	background-color: var(--table-light-color);
+	border-radius: 0 0 10px 10px;
+}
+.announcement-date {
+	text-align: center;
+	font-style: italic;
+}
+.announcement-text {
+	padding: 1em;
+	text-align: justify;
+	min-height: 2em;
+}
+
+.youtube-background {
+	position: absolute;
+	width: 100%;
+	-webkit-mask: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgb(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0) 100%);
+	overflow: hidden;
+	z-index: -1;
+}
+.has-yt-link {
+	padding-top: 2rem;
+	display: -ms-flexbox;
+	display: flex;
+  	justify-content: center;
+}
+.youtube-link iframe, .youtube-link video {
+	width: 800px;
+	height: 450px;
+}
+
+.memories-flex {
+	display: -ms-flexbox;
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
+	padding: 0;
+}
+.memories-index .flex-div {
+	width: 100%;
+}
+.col-memories {
+	max-width: 33%;
+	padding: 0 4px;
+}
+.col-memories img {
+	margin-bottom: 8px;
+	vertical-align: middle;
+	width: 100%;
+}
+
 @media(max-width: 767px) {
 	.hero_title {
 		text-shadow: 0px 0px 50px #5b5597;
 		font-size: 4em;
 	}
+	.index-second-title {
+		text-align: right;
+	}
+	.double-index-section {
+		flex-wrap: wrap;
+	}
+	.flex-div {
+		width: 100%;
+	}
+	.double-index-section .flex-div {
+		width: 100%;
+	}
+	.about-us-index {
+		flex-wrap: wrap-reverse;
+	}
+	.about-us-index .flex-div {
+		width: 100%;
+		padding: 0 0% 10% 0%;
+	}
+	.section-title {
+		text-align: right !important;
+		font-size: 3em;
+	}
+	.about-us-index .section-text {
+		text-align: justify;
+		padding-left: 0;
+	}
+	.announcement-div {
+		width: 100%;
+	}
+	.youtube-link iframe {
+		width: 300px;
+		height: 200px;
+	}
+	.col-memories {
+		max-width: 100%;
+	}
+}
+
+.podium {
+	text-align: center;
+	margin: 20px 0;
+}
+.podium-container {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+.podium-place {
+	text-align: center;
+	width: 100px;
+	margin: 0 10px;
+	padding: 10px;
+	background-color: #ddd;
+	border-radius: 5px;
+}
+.podium-2 {
+	background: rgb(255,215,0);
+	background: linear-gradient(47deg, rgba(255,215,0,1) 0%, rgba(255,223,49,1) 45%, rgba(255,230,94,1) 58%, rgba(227,191,0,1) 100%); 
+	height: 160px; 
+	color: black;
+}
+.podium-1 { 
+	background: rgb(192,192,192);
+	background: linear-gradient(39deg, rgba(192,192,192,1) 0%, rgba(203,203,203,1) 30%, rgba(245,245,245,1) 53%, rgba(241,241,241,1) 58%, rgba(156,156,156,1) 100%); 
+	height: 130px; 
+	color: black;
+}
+.podium-3 { 
+	background: rgb(205,127,50);
+	background: linear-gradient(47deg, rgba(205,127,50,1) 0%, rgba(219,141,64,1) 37%, rgba(227,158,89,1) 47%, rgba(236,158,82,1) 58%, rgba(162,101,40,1) 100%);  
+	height: 110px; 
+	color: black;
+}
+
+
+.about {
+	width: 100%;
+}
+.about img {
+	width: 100%;
 }
 
 .lead {
@@ -519,6 +832,7 @@ a.desc:after {
 	width: 100%;
 }
 .inline-form_items {
+	display: -ms-flexbox;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -532,7 +846,6 @@ a.desc:after {
 }
 /* CALENDAR PAGE FORM - FOR CONCERT DATE */
 .concert_date_form {
-	padding-left: 5%;
 	padding-right: 5%;
 }
 .field-concert-date {
@@ -655,59 +968,6 @@ a.desc:after {
 	width: 10%;
 	font-weight: bold;
 }
-/*still in the songs page*/
-.settings_bar {
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	list-style-type: none;
-}
-/* to make the add song button float to the left */
-.settings_bar li:first-child {
-	float: left;
-}
-.settings_bar li {
-	float: right;
-	margin-left: 5px;
-}
-#form-searchsong {
-	display: flex;
-	width: 100%;
-	align-items: baseline;
-}
-#form-searchsong .field-song-state label {
-	display: none;
-}
-/*make the search input area have no round edged to the right*/
-#form-searchsong .field-song-title input{
-	border-radius: 5px 0px 0px 5px;
-}
-#form-searchsong .field-proposal-title input{
-	border-radius: 5px 0px 0px 5px;
-}
-#form-searchsong .field-publicproposal-title input{
-	border-radius: 5px 0px 0px 5px;
-}
-/*make the search button have no round edged to the left*/
-#form-searchsong .search_button {
-	border-radius: 0px 5px 5px 0px;
-}
-.field-is-in-concert-checkbox {
-	display: flex;
-}
-.field-is-in-concert-checkbox .form-check {
-	margin: auto;
-}
-.field-song-setlist_spot {
-	float: right;
-}
-@media(max-width:767px) {
-	.settings_bar li {
-		float: left;
-		padding-bottom: 5px;
-	}
-}
-
 
 
 /* PROPOSAL TABLE */
@@ -765,6 +1025,7 @@ a.desc:after {
 	margin-left: 5px;
 }
 #form-searchsong {
+	display: -ms-flexbox;
 	display: flex;
 	width: 100%;
 	align-items: baseline;
@@ -787,6 +1048,7 @@ a.desc:after {
 	border-radius: 0px 5px 5px 0px;
 }
 .field-is-in-concert-checkbox {
+	display: -ms-flexbox;
 	display: flex;
 }
 .field-is-in-concert-checkbox .form-check {

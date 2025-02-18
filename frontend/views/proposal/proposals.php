@@ -18,8 +18,8 @@ $this->registerJsFile('/js/popup.js', ['depends' => [\yii\web\JqueryAsset::class
     <h1 style="text-align: center;" class="page_title"><?= Html::encode($this->title) ?></h1>
 
     <ul class="settings_bar">
-        <li><button role="button" class="btn btn-primary" onclick="openPopup('addproposal_popup')">Adauga Propunere</button></li>
-        <li style="float: left;"><?=Html::a('Sterge Filtre', Url::to(['proposal/proposals']), ['class' => 'btn btn-danger']); ?></li>
+        <li><button role="button" class="btn btn-primary" onclick="openPopup('addproposal_popup')">Adaugă Propunere</button></li>
+        <li style="float: left;"><?=Html::a('Șterge Filtre', Url::to(['proposal/proposals']), ['class' => 'btn btn-danger']); ?></li>
         <li class="filters">
             <?php $form = ActiveForm::begin(['id' => 'form-searchsong','method' => 'get', 'layout' => 'inline']); ?>
             <?= $form->errorSummary($searchModel);?>
@@ -28,19 +28,19 @@ $this->registerJsFile('/js/popup.js', ['depends' => [\yii\web\JqueryAsset::class
                 'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model
                 'theme' => Select2::THEME_KRAJEE_BS5,
                 'options' => [
-                    'placeholder' => 'Cauta dupa username...',
+                    'placeholder' => 'Caută după username...',
                 ],
                 'pluginOptions' => [
                     'allowClear' => true,
                 ],
             ]); ?>
 
-            <?= $form->field($searchModel, 'title')->label(Yii::t('app', 'Ce propunere cauti?')) ?>
-            <input type="submit" value="Cauta" class="btn btn-primary search_button">
+            <?= $form->field($searchModel, 'title')->label(Yii::t('app', 'Ce propunere cauți?')) ?>
+            <input type="submit" value="Caută" class="btn btn-primary search_button">
             <?php ActiveForm::end(); ?>
         </li>
     </ul>
-    <hr>
+    <hr class="settings_bar_hr">
 
     <?= $this->render('_proposals_table', [
         'searchModel' => $searchModel,

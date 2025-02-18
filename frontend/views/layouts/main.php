@@ -20,6 +20,11 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <?php $this->registerCsrfMetaTags() ?>
@@ -73,7 +78,7 @@ VANTA.FOG({
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Propuneri Publice', 'url' => ['/proposal/public_proposals']],
             ['label' => 'Propuneri', 'url' => ['/proposal/proposals']],
-            ['label' => 'Calendar', 'url' => ['/calendar/index']],
+            ['label' => 'Informații Concert și Anunțuri', 'url' => ['/announcement/index']],
             ['label' => 'Concert', 'url' => ['/song/concert']],
             ['label' => 'Melodii', 'url' => ['/song/index']],
         ];
@@ -86,19 +91,19 @@ VANTA.FOG({
     if (Yii::$app->user->isGuest) {
         echo Html::tag('div',Html::a('Login',['/user/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex login_logoutbutton']]);
     } else {
-        /*echo '<div class="btn-group">';
+        echo '<div class="btn-group">';
             echo '<a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">';
                 echo Yii::$app->user->identity->username;
             echo '</a>';
             echo '<ul class="dropdown-menu dropdown-menu-lg-end">';
-                echo '<li><a class="dropdown-item" href="#">Pagina mea</a></li>';
-                echo '<li><a class="dropdown-item" href="#">Statistici</a></li>';
+                echo '<li><a class="dropdown-item" href="/user/index">Pagina mea</a></li>';
+                echo '<li><a class="dropdown-item" href="/song/stats">Statistici</a></li>';
                 echo '<li><hr class="dropdown-divider"></li>';
-                echo '<li><a class="dropdown-item" href="#">Setari</a></li>';
-                echo Html::tag('li',Html::a('Logout',['/user/logout'],['class' => ['btn btn-link logout text-decoration-none']]),['class' => ['d-flex login_logoutbutton']]);
+                echo '<li><a class="dropdown-item" href="/user/settings">Setări</a></li>';
+                echo Html::tag('li',Html::a('Logout',['/user/logout'],['class' => ['dropdown-item logout text-decoration-none']]));
             echo '</ul>';
-        echo '</div>';*/
-        echo Html::tag('div',Html::a('Logout (' . Yii::$app->user->identity->username . ')',['/user/logout'],['class' => ['btn btn-link logout text-decoration-none']]),['class' => ['d-flex login_logoutbutton']]);
+        echo '</div>';
+        //echo Html::tag('div',Html::a('Logout (' . Yii::$app->user->identity->username . ')',['/user/logout'],['class' => ['btn btn-link logout text-decoration-none']]),['class' => ['d-flex login_logoutbutton']]);
     }
     NavBar::end();
     ?>
@@ -117,7 +122,8 @@ VANTA.FOG({
 <footer class="footer footer-dark mt-auto py-3 text-muted">
     <div class="container">
         <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="float-end"><?= Yii::powered() ?></p>
+        <p class="float-end">Made With Love By Huțanu Andrei 💜🤘</p>
+        <!--<p class="float-end"><?= Yii::powered() ?></p>-->
     </div>
 </footer>
 

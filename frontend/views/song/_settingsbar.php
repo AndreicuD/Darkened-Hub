@@ -8,11 +8,10 @@ use yii\helpers\ArrayHelper;
 ?>
 <ul class="settings_bar">
     <?php
-        if($page == 'index') echo "<li><button role=" . '"button"' . 'class="btn btn-primary" onclick="openPopup(' . "'addsong_popup'" . ')">Adauga Melodie</button></li>';
+        if($page == 'index') echo "<li><button role=" . '"button"' . 'class="btn btn-primary" onclick="openPopup(' . "'addsong_popup'" . ')">Adaugă Melodie</button></li>'
     ?>
-    
     <!--<li><button role="button" class="btn btn-primary" onclick="openPopup('addsong_popup')">Add song</button></li>-->
-    <li style="float: left;"><?=Html::a('Sterge Filtre', Url::to(['song/' . $page]), ['class' => 'btn btn-danger']); ?></li>
+    <li style="float: left;"><?=Html::a('Șterge Filtre', Url::to(['song/' . $page]), ['class' => 'btn btn-danger']); ?></li>
     <li class="filters">
         <?php $form = ActiveForm::begin(['id' => 'form-searchsong','method' => 'get', 'layout' => 'inline']); ?>
             <?= $form->errorSummary($searchModel);?>
@@ -32,15 +31,15 @@ use yii\helpers\ArrayHelper;
                 'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model
                 'theme' => Select2::THEME_KRAJEE_BS5,
                 'options' => [
-                    'placeholder' => 'Cauta dupa username...',
+                    'placeholder' => 'Caută după username...',
                 ],
                 'pluginOptions' => [
                     'allowClear' => true,
                 ],
             ]); ?>
 
-            <?= $form->field($searchModel, 'title')->label(Yii::t('app', 'Ce melodie cauti?')) ?>
-            <input type="submit" value="Cauta" class="btn btn-primary search_button">
+            <?= $form->field($searchModel, 'title')->label(Yii::t('app', 'Ce melodie cauți?')) ?>
+            <input type="submit" value="Caută" class="btn btn-primary search_button">
         
         <?php ActiveForm::end(); ?>
     </li>

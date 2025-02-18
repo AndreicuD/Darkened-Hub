@@ -25,7 +25,7 @@ class SongController extends Controller
                 'rules' => [
                     [
                         'actions' => [
-                            'index', 'concert', 'create', 'update', 'delete', 'edit',
+                            'index', 'concert', 'create', 'update', 'delete', 'edit', 'stats',
                         ],
                         'allow' => true,
                         'roles' => ['@'],
@@ -89,6 +89,94 @@ class SongController extends Controller
             'user' => $user,
         ]);
     }
+
+    public function actionStats($title = null)
+    {
+        $songModel = new Song();
+
+        $users = User::find()->all();
+        $userSongCounts_concert = [];
+        $userSongCounts_all = [];
+
+        foreach ($users as $user) {
+            $userName = $user->username;
+            $count_all = Song::find()
+                ->where([
+                    'or',
+                    ['first_guitar' => $userName],
+                    ['second_guitar' => $userName],
+                    ['drums' => $userName],
+                    ['bass' => $userName],
+                    ['first_voice' => $userName],
+                    ['second_voice' => $userName],
+                    ['piano' => $userName]
+                ])->count();
+            $count_concert = Song::find()
+                ->where([
+                    'or',
+                    ['first_guitar' => $userName, 'is_in_concert' => 1],
+                    ['second_guitar' => $userName, 'is_in_concert' => 1],
+                    ['drums' => $userName, 'is_in_concert' => 1],
+                    ['bass' => $userName, 'is_in_concert' => 1],
+                    ['first_voice' => $userName, 'is_in_concert' => 1],
+                    ['second_voice' => $userName, 'is_in_concert' => 1],
+                    ['piano' => $userName, 'is_in_concert' => 1]
+                ])->count();
+
+            if ($count_all > 0) {
+                $userSongCounts_all[$userName] = [
+                    'name' => $user->username,
+                    'count' => $count_all
+                ];
+            }
+            if ($count_concert > 0) {
+                $userSongCounts_concert[$userName] = [
+                    'name' => $user->username,
+                    'count' => $count_concert
+                ];
+            }
+        }
+
+        // ordoneaza descrescator
+        usort($userSongCounts_all, function ($a, $b) {
+            return $b['count'] - $a['count'];
+        });
+        usort($userSongCounts_concert, function ($a, $b) {
+            return $b['count'] - $a['count'];
+        });
+
+        //concert stuff
+        $state1count_concert = count(Song::findAll(['state' =>  1, 'is_in_concert' => 1]));
+        $state2count_concert = count(Song::findAll(['state' =>  2, 'is_in_concert' => 1]));
+        $state3count_concert = count(Song::findAll(['state' =>  3, 'is_in_concert' => 1]));
+        $state4count_concert = count(Song::findAll(['state' =>  4, 'is_in_concert' => 1]));
+        $state5count_concert = count(Song::findAll(['state' =>  5, 'is_in_concert' => 1]));
+
+        //all songs
+        $state1count_all = count(Song::findAll(['state' =>  1]));
+        $state2count_all = count(Song::findAll(['state' =>  2]));
+        $state3count_all = count(Song::findAll(['state' =>  3]));
+        $state4count_all = count(Song::findAll(['state' =>  4]));
+        $state5count_all = count(Song::findAll(['state' =>  5]));
+
+        return $this->render('stats', [
+            'songModel' => $songModel,
+            'userSongCounts_all' => $userSongCounts_all,
+            'userSongCounts_concert' => $userSongCounts_concert,
+
+            'state1count_concert' => $state1count_concert,
+            'state2count_concert' => $state2count_concert,
+            'state3count_concert' => $state3count_concert,
+            'state4count_concert' => $state4count_concert,
+            'state5count_concert' => $state5count_concert,
+            
+            'state1count_all' => $state1count_all,
+            'state2count_all' => $state2count_all,
+            'state3count_all' => $state3count_all,
+            'state4count_all' => $state4count_all,
+            'state5count_all' => $state5count_all,
+        ]);
+    }
     
     public function actionCreate()
     {   
@@ -97,16 +185,16 @@ class SongController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->save()) {
-                    Yii::$app->session->setFlash('success', 'Melodie creata cu succes.');
+                    Yii::$app->session->setFlash('success', 'Melodie creată cu succes.');
                     return $this->redirect(['song/index']);
                 } else {
-                    Yii::$app->session->setFlash('error', 'Nu s-a reusit crearea melodiei.');
+                    Yii::$app->session->setFlash('error', 'Nu s-a reușit crearea melodiei.');
                 }
             } else {
-                Yii::$app->session->setFlash('error', 'Validation failed: ' . json_encode($model->getErrors()));
+                Yii::$app->session->setFlash('error', 'Validare eșuată: ' . json_encode($model->getErrors()));
             }
         } else {
-            Yii::$app->session->setFlash('error', 'Failed to load form data.');
+            Yii::$app->session->setFlash('error', 'Încercarea de preluare a informației din formular a eșuat.');
         }
 
         return $this->redirect(['song/index']);
@@ -132,10 +220,10 @@ class SongController extends Controller
         $model = Song::findOne(['id' => $id]);
         //$model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Melodia a fost modificata.');
+            Yii::$app->session->setFlash('success', 'Melodia a fost modificată.');
             $this->redirect(['song/' . $page]);
         } else {
-            Yii::$app->session->setFlash('error', 'A aparut o eroare in salvarea melodiei.');
+            Yii::$app->session->setFlash('error', 'A apărut o eroare în salvarea melodiei.');
         }
 
         return $this->redirect(['song/' . $page]);
@@ -144,7 +232,7 @@ class SongController extends Controller
     {
         $model = Song::findOne(['id' => $id]);
         if ($model->delete()) {
-            Yii::$app->session->setFlash('success', 'Melodia a fost stearsa.');
+            Yii::$app->session->setFlash('success', 'Melodia a fost ștearsă.');
         }
 
         $this->redirect(['song/index']);

@@ -168,7 +168,7 @@ class Song extends \yii\db\ActiveRecord
     public static function stateList()
     {
         return [
-            '5' => Yii::t('app', 'Neinceputa'),
+            '5' => Yii::t('app', 'Neîncepută'),
             '4' => Yii::t('app', 'Foarte bine'),
             '3' => Yii::t('app', 'Bine'),
             '2' => Yii::t('app', 'Se putea mai bine..'),

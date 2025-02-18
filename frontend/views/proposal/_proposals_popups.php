@@ -17,8 +17,8 @@ $songModel->artist = $model->artist;
 <div id="delete_<?=$page?>proposal_popup-<?=$model->id?>">
     <div class="overlay_opaque" onclick="closePopup('delete_<?=$page?>proposal_popup-<?=$model->id?>')"></div>
     <div class="popup">
-        <h1 class="page_title"><?= Yii::t('app', 'Asta va sterge propunerea pentru: ') ?><strong><?= Html::encode($model->title) ?></strong></h1>
-        <p style="text-align: center; line-height: 1.5rem; padding: 0;" class="lead"><?= Yii::t('app', 'Esti sigur ca vrei sa continui?') ?></p>
+        <h1 class="page_title"><?= Yii::t('app', 'Asta va șterge propunerea pentru: ') ?><strong><?= Html::encode($model->title) ?></strong></h1>
+        <p style="text-align: center; line-height: 1.5rem; padding: 0;" class="lead"><?= Yii::t('app', 'Ești sigur că vrei să continui?') ?></p>
         <br>
         <div class="container text-center">
             <div class="row">
@@ -51,10 +51,10 @@ $songModel->artist = $model->artist;
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <button onclick="closePopup('update_<?=$page?>proposal_popup-<?=$model->id?>')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Inchide') ?></button>
+                    <button onclick="closePopup('update_<?=$page?>proposal_popup-<?=$model->id?>')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Închide') ?></button>
                 </div>
                 <div class="col">
-                    <input type="submit" value="Salveaza" class="btn btn-success">
+                    <input type="submit" value="Salvează" class="btn btn-success">
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@ $songModel->artist = $model->artist;
 <div id="sendtosetlist_popup-<?=$model->id?>">
     <div class="overlay_opaque" onclick="closePopup('sendtosetlist_popup-<?=$model->id?>')"></div>
     <div class="popup">
-        <h1 class="page_title"><?= Yii::t('app', 'Trimite in lista de melodii') ?></h1>
+        <h1 class="page_title"><?= Yii::t('app', 'Trimite în lista de melodii') ?></h1>
         <?php $form = ActiveForm::begin([
             'id' => 'form-addsong',
             'type' => ActiveForm::TYPE_FLOATING,
@@ -143,9 +143,9 @@ $songModel->artist = $model->artist;
                 'uncheck' => '0',
                 'value' => '1',
                 'id' => 'is-in-concert-checkbox', // Add an ID for targeting with JS
-            ])->label(Yii::t('app', 'E in concert?')); ?>
+            ])->label(Yii::t('app', 'E în concert?')); ?>
             
-            <?= $form->field($songModel, 'setlist_spot')->label(Yii::t('app', 'Spot in Setlist')); ?>
+            <?= $form->field($songModel, 'setlist_spot')->label(Yii::t('app', 'Loc în Setlist')); ?>
             <?= $form->field($songModel, 'state')->dropDownList([
                 '5' => $songModel::stateList()['5'], // Gray for "Not done yet"
                 '4' => $songModel::stateList()['4'],   // Green for "Great"
@@ -163,13 +163,13 @@ $songModel->artist = $model->artist;
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <button onclick="closePopup('sendtosetlist_popup-<?=$model->id?>')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Inchide') ?></button>
+                    <button onclick="closePopup('sendtosetlist_popup-<?=$model->id?>')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Închide') ?></button>
                 </div>
                 <div class="col">
-                    <input type="reset" value="Reseteaza" class="btn btn-warning">
+                    <input type="reset" value="Resetează" class="btn btn-warning">
                 </div>
                 <div class="col">
-                    <input type="submit" value="Salveaza" class="btn btn-success">
+                    <input type="submit" value="Salvează" class="btn btn-success">
                 </div>
             </div>
         </div>

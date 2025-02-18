@@ -9,8 +9,8 @@ use yii\helpers\ArrayHelper;
 <div id="delete_song_popup-<?=$model->id?>">
     <div class="overlay_opaque" onclick="closePopup('delete_song_popup-<?=$model->id?>')"></div>
     <div class="popup">
-        <h1 class="page_title"><?= Yii::t('app', 'Asta va sterge melodia: ') ?><strong><?= Html::encode($model->title) ?></strong></h1>
-        <p style="text-align: center; line-height: 1.5rem; padding: 0;" class="lead"><?= Yii::t('app', 'Esti sigur ca vrei sa continui?') ?></p>
+        <h1 class="page_title"><?= Yii::t('app', 'Asta va șterge melodia: ') ?><strong><?= Html::encode($model->title) ?></strong></h1>
+        <p style="text-align: center; line-height: 1.5rem; padding: 0;" class="lead"><?= Yii::t('app', 'Ești sigur că vrei să continui?') ?></p>
         <br>
         <div class="container text-center">
             <div class="row">
