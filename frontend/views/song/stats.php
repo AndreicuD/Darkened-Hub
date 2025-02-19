@@ -95,8 +95,45 @@ $states = [$songModel->stateList()[5], $songModel->stateList()[1], $songModel->s
                     <div class="podium-container">
                         <?php foreach ($topUsers as $index => $user): ?>
                             <div class="podium-place podium-<?= $index + 1 ?>">
-                                <p style="margin-bottom: 0;"><b><?= Html::encode($user['name']) ?></b></p>
+                                <p class="podium-name"><b><?= Html::encode($user['name']) ?></b></p>
                                 <p><?= $user['count'] ?> melodii</p>
+
+                                <!-- profile picture stuff -->
+                                <?php
+                                    $uploadPath = Yii::getAlias('@frontend/web/img/user-icons/');
+                                    $defaultAvatar = $uploadPath . 'default-user-icon.jpg';
+                                    $userAvatar = $defaultAvatar;
+                                    
+                                    // Check for user avatar
+                                    $all_users = ArrayHelper::map($users::find()->all(), 'username', 'id');
+                                    $current_user = Yii::$app->user->id;
+                                    foreach($all_users as $username => $id) {
+                                        if($username == $user['name']) {
+                                            $current_user = $id;
+                                            break;
+                                        }
+                                    }
+
+                                    $extensions = ['png', 'jpg', 'jpeg', 'gif'];
+                                    $good_extension;
+                                    foreach ($extensions as $ext) {
+
+                                        $filePath = $uploadPath . $current_user . '.' . $ext;
+                                        if (file_exists($filePath)) {
+                                            $userAvatar = $filePath;
+                                            $good_extension = $ext;
+                                            break;
+                                        }
+                                    }
+                                    if($userAvatar == $defaultAvatar) {
+                                        $current_user = 'default-user-icon';
+                                        $good_extension = 'jpg';
+                                    }
+                                ?>
+
+                                <div class="profile-picture">
+                                    <img src="<?= Yii::getAlias('@web/img/user-icons/') . $current_user . '.' . $good_extension . '?t=' . time(); ?>" class="img-thumbnail avatar  podium-avatar">
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -109,8 +146,10 @@ $states = [$songModel->stateList()[5], $songModel->stateList()[1], $songModel->s
             <div class="index-section double-index-section" style="flex-wrap: wrap;">
                 <?php foreach ($restUsers as $index => $user): ?>
                     <div class="small-flex-div-33">
-                        <p style="margin-bottom: 0;"><b><?= Html::encode($user['name']) ?></b></p>
+                        <p style="margin-bottom: 0;"><b><?= $index + 4 ?>. <?=Html::encode($user['name']) ?></b></p>
                         <p><?= $user['count'] ?> melodii</p>
+
+                        
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -173,6 +212,43 @@ $states = [$songModel->stateList()[5], $songModel->stateList()[1], $songModel->s
                             <div class="podium-place podium-<?= $index + 1 ?>">
                                 <p style="margin-bottom: 0;"><b><?= Html::encode($user['name']) ?></b></p>
                                 <p><?= $user['count'] ?> melodii</p>
+                                
+                                <!-- profile picture stuff -->
+                                <?php
+                                    $uploadPath = Yii::getAlias('@frontend/web/img/user-icons/');
+                                    $defaultAvatar = $uploadPath . 'default-user-icon.jpg';
+                                    $userAvatar = $defaultAvatar;
+                                    
+                                    // Check for user avatar
+                                    $all_users = ArrayHelper::map($users::find()->all(), 'username', 'id');
+                                    $current_user = Yii::$app->user->id;
+                                    foreach($all_users as $username => $id) {
+                                        if($username == $user['name']) {
+                                            $current_user = $id;
+                                            break;
+                                        }
+                                    }
+
+                                    $extensions = ['png', 'jpg', 'jpeg', 'gif'];
+                                    $good_extension;
+                                    foreach ($extensions as $ext) {
+
+                                        $filePath = $uploadPath . $current_user . '.' . $ext;
+                                        if (file_exists($filePath)) {
+                                            $userAvatar = $filePath;
+                                            $good_extension = $ext;
+                                            break;
+                                        }
+                                    }
+                                    if($userAvatar == $defaultAvatar) {
+                                        $current_user = 'default-user-icon';
+                                        $good_extension = 'jpg';
+                                    }
+                                ?>
+
+                                <div class="profile-picture">
+                                    <img src="<?= Yii::getAlias('@web/img/user-icons/') . $current_user . '.' . $good_extension . '?t=' . time(); ?>" class="img-thumbnail avatar  podium-avatar">
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -185,7 +261,7 @@ $states = [$songModel->stateList()[5], $songModel->stateList()[1], $songModel->s
             <div class="index-section double-index-section" style="flex-wrap: wrap;">
                 <?php foreach ($restUsers as $index => $user): ?>
                     <div class="small-flex-div-33">
-                        <p style="margin-bottom: 0;"><b><?= Html::encode($user['name']) ?></b></p>
+                        <p style="margin-bottom: 0;"><b><?= $index + 4 ?>. <?= Html::encode($user['name']) ?></b></p>
                         <p><?= $user['count'] ?> melodii</p>
                     </div>
                 <?php endforeach; ?>

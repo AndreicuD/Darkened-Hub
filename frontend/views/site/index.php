@@ -44,7 +44,7 @@ $this->title = 'Darkened Tunes';
                 <a href="<?= Url::toRoute(['site/about']); ?>" class="btn btn-primary">Află mai multe informații despre noi.</a>
             </div>
             <div class="flex-div">
-                <img src="..\frontend\web\img\about.png" alt="Photo of us">
+                <img src="..\frontend\web\img\about.png" style="width: 100%;" alt="Photo of us">
             </div>
         </div>
         <div class="index-section concert-index">

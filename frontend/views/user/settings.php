@@ -38,8 +38,8 @@ $this->title = 'Setări';
             </div>
             <?php ActiveForm::end(); ?>
 
-            
             <hr>
+
             <p class="small_gray_text">Schimbă Parola</p>
             <!-- CHANGE PASSWORD FORM -->
             <?php $passwordForm = ActiveForm::begin([
@@ -59,6 +59,51 @@ $this->title = 'Setări';
             <input type="submit" value="Schimbă Parola" class="btn btn-success">
             <?php ActiveForm::end(); ?>
         </div>
+        <div class="flex-div avatar-div">
+            <!-- profile picture stuff -->
+            <?php
+                $uploadPath = Yii::getAlias('@frontend/web/img/user-icons/');
+                $defaultAvatar = $uploadPath . 'default-user-icon.jpg';
+                $userAvatar = $defaultAvatar;
+                
+                // Check for user avatar
+                $extensions = ['png', 'jpg', 'jpeg', 'gif'];
+                $good_extension;
+                foreach ($extensions as $ext) {
+                    $filePath = $uploadPath . Yii::$app->user->id . '.' . $ext;
+                    if (file_exists($filePath)) {
+                        $userAvatar = $filePath;
+                        $good_extension = $ext;
+                        break;
+                    }
+                }
+                if($userAvatar == $defaultAvatar) {
+                    $current_user = 'default-user-icon';
+                    $good_extension = 'jpg';
+                }
+            ?>
 
+            <!-- Prevent browser caching by appending ?t=timestamp -->
+            <img src="<?= Yii::getAlias('@web/img/user-icons/') . Yii::$app->user->id . '.' . $good_extension . '?t=' . time(); ?>" class="img-thumbnail avatar">
+
+            <?php $form = ActiveForm::begin([
+                'id' => 'form-upload-avatar',
+                'options' => ['enctype' => 'multipart/form-data'], 
+                'action' => ['user/upload-avatar'], 
+                'method' => 'post',
+            ]); ?>
+
+            <?= $form->field($uploadModel, 'avatar')->widget(FileInput::classname(), [
+                'options' => ['accept' => 'image/*'],
+                'pluginOptions' => [
+                    'showCaption' => false,
+                    'uploadClass' => 'btn btn-success',
+                    'removeClass' => 'btn btn-danger',
+                ],
+            ]); ?>
+
+            <?php ActiveForm::end(); ?>
+
+        </div>  
     </div>
 </div>

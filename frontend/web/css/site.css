@@ -514,6 +514,18 @@ a.desc:after {
 	}
 }
 
+.avatar {
+	width: 150px;
+	object-fit: cover;
+	aspect-ratio: 1 / 1;
+}
+.podium-avatar {
+	width: 100%;
+}
+.avatar-div {
+	margin-top: 2em;
+}
+
 .hero {
 	background-image: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 100%), url("../frontend/web/img/hero.png");
 	background-color: black;
@@ -591,10 +603,6 @@ a.desc:after {
 }
 .double-index-section .section-text {
 	text-align: right;
-}
-.flex-div img {
-	width: 100%;
-	background-color: #000;
 }
 
 .about-us-index {
@@ -709,6 +717,12 @@ a.desc:after {
 	vertical-align: middle;
 	width: 100%;
 }
+.file-preview {
+	background-color: var(--table-dark-color);
+}
+.file-drop-zone {
+	border: 0;
+}
 
 @media(max-width: 767px) {
 	.hero_title {
@@ -771,31 +785,51 @@ a.desc:after {
 }
 .podium-place {
 	text-align: center;
-	width: 100px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	justify-content: center;
+	width: 20%;
 	margin: 0 10px;
 	padding: 10px;
 	background-color: #ddd;
 	border-radius: 5px;
 }
+.podium-place p {
+	width: 100%;
+	word-wrap: break-word;
+	overflow: auto;
+}
+.podium-place .profile-picture {
+	align-self: flex-end;
+}
+.podium-place .podium-name {
+	margin-bottom: 0;
+
+}
 .podium-2 {
 	background: rgb(255,215,0);
 	background: linear-gradient(47deg, rgba(255,215,0,1) 0%, rgba(255,223,49,1) 45%, rgba(255,230,94,1) 58%, rgba(227,191,0,1) 100%); 
-	min-height: 14em;
+	min-height: calc(14em + 80px);
 	color: black;
 }
 .podium-1 { 
 	background: rgb(192,192,192);
 	background: linear-gradient(39deg, rgba(192,192,192,1) 0%, rgba(203,203,203,1) 30%, rgba(245,245,245,1) 53%, rgba(241,241,241,1) 58%, rgba(156,156,156,1) 100%);
-	min-height: 10em;
+	min-height: calc(11em + 80px);
 	color: black;
 }
 .podium-3 { 
 	background: rgb(205,127,50);
 	background: linear-gradient(47deg, rgba(205,127,50,1) 0%, rgba(219,141,64,1) 37%, rgba(227,158,89,1) 47%, rgba(236,158,82,1) 58%, rgba(162,101,40,1) 100%);
-	min-height: 8em;
+	min-height: calc(8em + 80px);
 	color: black;
 }
-
+@media(max-width: 767px) {
+	.podium-place {
+		width: 33%;
+	}
+}
 
 
 .about {

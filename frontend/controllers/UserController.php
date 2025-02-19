@@ -9,10 +9,12 @@ use yii\base\InvalidArgumentException;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\Response;
+use yii\web\UploadedFile;
 use yii\filters\AccessControl;
 use frontend\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ChangePasswordForm;
+use frontend\models\UploadAvatarForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use common\models\User;
@@ -37,7 +39,7 @@ class UserController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['index', 'settings', 'logout', 'reset-password', 'request-password-reset', 'change-password'],
+                        'actions' => ['index', 'settings', 'logout', 'reset-password', 'request-password-reset', 'change-password', 'upload-avatar'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -80,7 +82,8 @@ class UserController extends Controller
     {
         $user = User::findOne(['id' => Yii::$app->user->id]);
         $changePasswordModel = new ChangePasswordForm();
-
+        $uploadModel = new UploadAvatarForm();
+    
         if ($user->load(Yii::$app->request->post())) {
             if ($user->validate()) {
                 if ($user->save()) {
@@ -92,13 +95,15 @@ class UserController extends Controller
                 Yii::$app->session->setFlash('error', 'Validare eșuată: ' . json_encode($user->getErrors()));
             }
         }
-        
-        //return $this->redirect(['user/settings']);
+    
         return $this->render('settings', [
             'userModel' => $user,
             'changePasswordModel' => $changePasswordModel,
+            'uploadModel' => $uploadModel,
         ]);
     }
+    
+
     public function actionChangePassword()
     {
         $model = new ChangePasswordForm();
@@ -111,6 +116,25 @@ class UserController extends Controller
         Yii::$app->session->setFlash('error', 'Parola nu a fost schimbată. Verifică datele introduse.');
         return $this->redirect(['user/settings']);
     }
+
+    public function actionUploadAvatar()
+    {
+        $model = new UploadAvatarForm();
+
+        if (Yii::$app->request->isPost) {
+
+            $model->avatar = UploadedFile::getInstance($model, 'avatar');
+
+            if ($model->upload()) {
+                Yii::$app->session->setFlash('success', 'Poza de profil a fost actualizată cu succes.');
+            } else {
+                Yii::$app->session->setFlash('error', 'Eroare la încărcarea imaginii.');
+            }
+        }
+
+        return $this->redirect(['user/settings']);
+    }
+
 
     /**
      * Logs in a user.

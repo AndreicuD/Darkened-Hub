@@ -160,6 +160,7 @@ class SongController extends Controller
         $state5count_all = count(Song::findAll(['state' =>  5]));
 
         return $this->render('stats', [
+            'users' => $user,
             'songModel' => $songModel,
             'userSongCounts_all' => $userSongCounts_all,
             'userSongCounts_concert' => $userSongCounts_concert,
