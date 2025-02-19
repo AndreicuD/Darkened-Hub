@@ -12,6 +12,7 @@ use yii\web\Response;
 use yii\filters\AccessControl;
 use frontend\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
+use frontend\models\ChangePasswordForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use common\models\User;
@@ -36,7 +37,7 @@ class UserController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['index', 'profile', 'logout'],
+                        'actions' => ['index', 'settings', 'logout', 'reset-password', 'request-password-reset', 'change-password'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -73,6 +74,42 @@ class UserController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    public function actionSettings()
+    {
+        $user = User::findOne(['id' => Yii::$app->user->id]);
+        $changePasswordModel = new ChangePasswordForm();
+
+        if ($user->load(Yii::$app->request->post())) {
+            if ($user->validate()) {
+                if ($user->save()) {
+                    Yii::$app->session->setFlash('success', 'Informațiile au fost modificate.');
+                } else {
+                    Yii::$app->session->setFlash('error', 'Nu s-a reușit modificarea informațiilor.');
+                }
+            } else {
+                Yii::$app->session->setFlash('error', 'Validare eșuată: ' . json_encode($user->getErrors()));
+            }
+        }
+        
+        //return $this->redirect(['user/settings']);
+        return $this->render('settings', [
+            'userModel' => $user,
+            'changePasswordModel' => $changePasswordModel,
+        ]);
+    }
+    public function actionChangePassword()
+    {
+        $model = new ChangePasswordForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->changePassword()) {
+            Yii::$app->session->setFlash('success', 'Parola a fost schimbată cu succes.');
+            return $this->redirect(['user/settings']);
+        }
+
+        Yii::$app->session->setFlash('error', 'Parola nu a fost schimbată. Verifică datele introduse.');
+        return $this->redirect(['user/settings']);
     }
 
     /**

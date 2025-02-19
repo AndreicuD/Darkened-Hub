@@ -79,6 +79,7 @@ VANTA.FOG({
             ['label' => 'Propuneri Publice', 'url' => ['/proposal/public_proposals']],
             ['label' => 'Propuneri', 'url' => ['/proposal/proposals']],
             ['label' => 'Informații Concert și Anunțuri', 'url' => ['/announcement/index']],
+            ['label' => 'Statistici', 'url' => ['/song/stats']],
             ['label' => 'Concert', 'url' => ['/song/concert']],
             ['label' => 'Melodii', 'url' => ['/song/index']],
         ];
@@ -96,10 +97,10 @@ VANTA.FOG({
                 echo Yii::$app->user->identity->username;
             echo '</a>';
             echo '<ul class="dropdown-menu dropdown-menu-lg-end">';
-                echo '<li><a class="dropdown-item" href="/user/index">Pagina mea</a></li>';
-                echo '<li><a class="dropdown-item" href="/song/stats">Statistici</a></li>';
-                echo '<li><hr class="dropdown-divider"></li>';
+                //echo '<li><a class="dropdown-item" href="/user/index">Pagina mea</a></li>';
+                //echo '<li><a class="dropdown-item" href="/song/stats">Statistici</a></li>';
                 echo '<li><a class="dropdown-item" href="/user/settings">Setări</a></li>';
+                echo '<li><hr class="dropdown-divider"></li>';
                 echo Html::tag('li',Html::a('Logout',['/user/logout'],['class' => ['dropdown-item logout text-decoration-none']]));
             echo '</ul>';
         echo '</div>';

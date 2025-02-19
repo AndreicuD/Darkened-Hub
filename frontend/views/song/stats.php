@@ -85,17 +85,17 @@ $states = [$songModel->stateList()[5], $songModel->stateList()[1], $songModel->s
             });
             </script>
 
-            <?php if (!empty($userSongCounts_all)): ?>
+            <?php if (!empty($userSongCounts_concert)): ?>
                 <div class="podium">
                     <!--<h2 class="page_title">Podium</h2>-->
                     <?php
-                        $topUsers = array_slice($userSongCounts_all, 0, 3);
+                        $topUsers = array_slice($userSongCounts_concert, 0, 3);
                         [$topUsers[0], $topUsers[1]] = [$topUsers[1], $topUsers[0]];
                     ?>
                     <div class="podium-container">
                         <?php foreach ($topUsers as $index => $user): ?>
                             <div class="podium-place podium-<?= $index + 1 ?>">
-                                <p style="margin-bottom: 0;"><?= Html::encode($user['name']) ?></p>
+                                <p style="margin-bottom: 0;"><b><?= Html::encode($user['name']) ?></b></p>
                                 <p><?= $user['count'] ?> melodii</p>
                             </div>
                         <?php endforeach; ?>
@@ -104,6 +104,16 @@ $states = [$songModel->stateList()[5], $songModel->stateList()[1], $songModel->s
             <?php else: ?>
                 <p>Nu există date pentru a crea podiumul.</p>
             <?php endif; ?>
+
+            <?php $restUsers = array_slice($userSongCounts_concert, 3); ?>
+            <div class="index-section double-index-section" style="flex-wrap: wrap;">
+                <?php foreach ($restUsers as $index => $user): ?>
+                    <div class="small-flex-div-33">
+                        <p style="margin-bottom: 0;"><b><?= Html::encode($user['name']) ?></b></p>
+                        <p><?= $user['count'] ?> melodii</p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
         <div class="flex-div" style="align-self: flex-start;">
             <h2 class="page_title">Toate Melodiile</h2>
@@ -161,7 +171,7 @@ $states = [$songModel->stateList()[5], $songModel->stateList()[1], $songModel->s
                     <div class="podium-container">
                         <?php foreach ($topUsers as $index => $user): ?>
                             <div class="podium-place podium-<?= $index + 1 ?>">
-                                <p style="margin-bottom: 0;"><?= Html::encode($user['name']) ?></p>
+                                <p style="margin-bottom: 0;"><b><?= Html::encode($user['name']) ?></b></p>
                                 <p><?= $user['count'] ?> melodii</p>
                             </div>
                         <?php endforeach; ?>
@@ -170,6 +180,16 @@ $states = [$songModel->stateList()[5], $songModel->stateList()[1], $songModel->s
             <?php else: ?>
                 <p>Nu există date pentru a crea podiumul.</p>
             <?php endif; ?>
+
+            <?php $restUsers = array_slice($userSongCounts_all, 3); ?>
+            <div class="index-section double-index-section" style="flex-wrap: wrap;">
+                <?php foreach ($restUsers as $index => $user): ?>
+                    <div class="small-flex-div-33">
+                        <p style="margin-bottom: 0;"><b><?= Html::encode($user['name']) ?></b></p>
+                        <p><?= $user['count'] ?> melodii</p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </div>
