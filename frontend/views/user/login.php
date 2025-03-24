@@ -2,7 +2,7 @@
 
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
-/** @var \backend\LoginForm $model */
+/** @var frontend\models\LoginForm $model */
 
 use yii\bootstrap5\ActiveForm;
 use yii\bootstrap5\Html;
@@ -26,13 +26,13 @@ $this->title = Yii::t('app', 'Login');
                 <?= $form->field($model, 'rememberMe')->checkbox() ?>
 
                 <div class="my-1 mx-0" style="color:#999;">
-                    <?= Yii::t('app', 'If you forgot your password you can ') ?> <?= Html::a('reset it', ['user/request-password-reset']) ?>.
+                    <?= Yii::t('app', 'If you forgot your password you can ') ?> <?= Html::a(Yii::t('app', 'reset it'), ['user/request-password-reset']) ?>.
                     <!--<br>
                     Need new verification email? <?= Html::a('Resend', ['user/resend-verification-email']) ?>-->
                 </div>
                 <br>
                 <div class="form-group" style="text-align: center;">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Login'), ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

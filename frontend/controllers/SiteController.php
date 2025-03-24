@@ -8,6 +8,7 @@ use common\models\Concert;
 use common\models\Announcement;
 use Yii;
 use yii\web\Controller;
+use yii\web\Response;
 
 /**
  * Site controller
@@ -38,22 +39,18 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $model = new PublicProposal();
-        $dataProvider = $model->searchLatest();
+        $proposals = $model->searchLatest();
 
-        $concert = new Concert();
-        $concertModel = Concert::findOne(['id' => 1]);
-        $concert_date = $concert->get_date(1);
+        $concert = Concert::findOne(['status' => Concert::STATUS_ACTIVE]);
 
         $announcement = new Announcement();
         $data_announcement = $announcement->searchLatest(3);
 
-        $this->layout = "index_layout";
         return $this->render('index', [
             'model' => $model,
-            'dataProvider' => $dataProvider,
-            'concertModel' => $concertModel,
-            'concert_date' => $concert_date,
-            'data_announcement' => $data_announcement
+            'proposals' => $proposals,
+            'data_announcement' => $data_announcement,
+            'concert' => $concert,
         ]);
     }
 
@@ -70,37 +67,49 @@ class SiteController extends Controller
     /**
      * Displays concerts page.
      *
-     * @return mixed
+     * @return string
      */
     public function actionConcerts()
     {
         $model = new PublicProposal();
         $dataProvider = $model->searchLatest();
 
-        $concert = Concert::findOne(['id' => 1]);
-        $concert_date = $concert->get_date(1);
+        $concert = Concert::findOne(['status' => Concert::STATUS_ACTIVE]);
+        $next_ones = (new Concert())->search([]);
+        $next_ones->query
+            ->andWhere('date > :date', [':date' => $concert->date])
+            ->limit(3)
+            ->orderBy(['date'=> SORT_ASC]);
+        $public_prop = new PublicProposal();
+        $last_one = (new Concert())->find()
+            ->where('date < :date', [':date' => $concert->date])
+            ->orderBy(['date'=> SORT_DESC])
+            ->one();
+        $public_prop = new PublicProposal();
 
         return $this->render('concerts', [
             'model' => $model,
             'dataProvider' => $dataProvider,
-            'concertModel' => $concert,
-            'concert_date' => $concert_date,
+            'concert' => $concert,
+            'next_concerts' => $next_ones,
+            'last_concert' => $last_one,
+            'proposals' => $public_prop->searchLatest(),
         ]);
     }
 
     /**
      * Displays contact page.
      *
-     * @return mixed
+     * @return string|Response
      */
     public function actionContact()
     {
         $model = new ContactForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
-                Yii::$app->session->setFlash('success', 'Mulțumim că ne-ai contactat. O să-ți răspundem în cel mai scurt timp posibil.');
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Mulțumim că ne-ai contactat. O să-ți răspundem în cel mai scurt timp posibil.'));
             } else {
-                Yii::$app->session->setFlash('error', 'A apărut o eroare. Mesajul nu a fost transmis.');
+                Yii::$app->session->setFlash('error', Yii::t('app', 'A apărut o eroare. Mesajul nu a fost transmis.'));
             }
 
             return $this->refresh();

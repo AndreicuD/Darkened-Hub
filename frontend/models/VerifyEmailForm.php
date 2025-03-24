@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use common\models\User;
+use Yii;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
 
@@ -29,13 +30,23 @@ class VerifyEmailForm extends Model
     public function __construct($token, array $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException('Verify email token cannot be blank.');
+            throw new InvalidArgumentException(Yii::t('app', 'Verify email token cannot be blank.'));
         }
         $this->_user = User::findByVerificationToken($token);
         if (!$this->_user) {
-            throw new InvalidArgumentException('Wrong verify email token.');
+            throw new InvalidArgumentException(Yii::t('app', 'Wrong verify email token.'));
         }
         parent::__construct($config);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'token' => Yii::t('app', 'Token'),
+        ];
     }
 
     /**

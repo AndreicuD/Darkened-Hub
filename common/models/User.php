@@ -43,6 +43,7 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_ACTIVE = 10;
 
     public $full_name = null;
+    public $password;
 
     /**
      * @var \common\models\AuthAssignment
@@ -77,8 +78,6 @@ class User extends ActiveRecord implements IdentityInterface
             ['email', 'email', 'on' => 'create'],
             ['email', 'unique', 'on' => 'default'],
             ['email', 'unique', 'on' => 'create'],
-            [['firstname', 'lastname'], 'unique', 'skipOnEmpty' => true, 'on' => 'default'],
-            [['firstname', 'lastname'], 'unique', 'skipOnEmpty' => true, 'on' => 'create'],
             /*['password_confirmation', 'compare', 'compareAttribute' => 'new_password', 'on' => 'create'],*/
             [['auth_key', 'password_hash', 'password_reset_token', 'verification_token', 'password', 'newsletter_subscription'], 'safe'],
             [['id', 'username', 'email', 'firstname', 'lastname', 'sex', 'phone', 'birth_date', 'item_name'], 'safe', 'on' => 'search'],

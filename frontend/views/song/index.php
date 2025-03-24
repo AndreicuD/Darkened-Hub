@@ -1,7 +1,10 @@
 <?php
 
 /** @var yii\web\View $this */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/** @var array $users */
+/* @var yii\data\ActiveDataProvider $dataProvider */
+/** @var common\models\User $user */
+/** @var common\models\Song $searchModel */
 
 use yii\bootstrap5\Html;
 use yii\widgets\ListView;
@@ -22,11 +25,12 @@ $this->title = Yii::t('app', 'Melodii');
         'user' => $user,
         'page' => 'index',
     ]) ?>
-    
+
     <?= $this->render('_songs_table', [
         'searchModel' => $searchModel,
         'dataProvider' => $dataProvider,
         'user' => $user,
+        'users' => $users,
         'page' => 'index',
     ]) ?>
 

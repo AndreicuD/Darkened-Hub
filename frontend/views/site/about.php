@@ -2,9 +2,9 @@
 
 /** @var yii\web\View $this */
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
-$this->title = Yii::t('app', 'About Us');
+$this->title = Yii::t('app', 'Despre noi');
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-about">

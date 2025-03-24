@@ -1,7 +1,12 @@
 <?php
 
 /** @var yii\web\View $this */
+/** @var array $users */
+/** @var yii\data\ActiveDataProvider $dataProvider */
+/** @var common\models\Song $searchModel */
+/** @var string $page the page identifier */
 
+use common\models\User;
 use yii\bootstrap5\Html;
 use yii\widgets\ListView;
 use yii\helpers\Url;
@@ -14,13 +19,14 @@ $this->registerJsFile('/js/popup.js', ['depends' => [\yii\web\JqueryAsset::class
 
 global $current_page;
 $current_page = $page;
+
 ?>
 
-<div class="table_wrapper">       
+<div class="table_wrapper">
     <?php
         echo GridView::widget([
             'dataProvider' => $dataProvider,
-            'layout' => '{items}{pager}{toggleData}{export}',
+            'layout' => '{toggleData}{export}{pager}{items}{pager}',
             'tableOptions' => [
                 'class' => 'songs_table',
                 'id' => 'songs_table',
@@ -32,7 +38,7 @@ $current_page = $page;
             'hover' => false,
             'striped' => false,
             'export' => [
-                'label' => 'Export data',
+                'label' => Yii::t("app", "Exportă datele"),
                 'showConfirmAlert' => false,
                 'fontAwesome' => true,
                 'options' => ['class' => 'btn-primary'],
@@ -46,8 +52,8 @@ $current_page = $page;
             'columns' => [
                 //['class' => 'yii\grid\SerialColumn'],
                 [
-                    'attribute' => 'title', 
-                    'format' => 'raw', 
+                    'attribute' => 'title',
+                    'format' => 'raw',
                     'label' => 'Titlu',
                     'content' => function ($searchModel) {
                         return '<i class="fa fa-circle state-' . $searchModel->state . '" ></i> '. $searchModel->title;
@@ -58,38 +64,38 @@ $current_page = $page;
                 ],
                 ['attribute' => 'artist', 'format' => 'text', 'label' => 'Artist'],
                 [
-                    'attribute' => 'first_guitar', 
-                    'format' => 'text', 
+                    'attribute' => 'first_guitar',
+                    'format' => 'text',
                     'label' => $searchModel::instrumentList()['first_guitar'],
-                ],  
+                ],
                 [
-                    'attribute' => 'second_guitar', 
-                    'format' => 'text', 
+                    'attribute' => 'second_guitar',
+                    'format' => 'text',
                     'label' => $searchModel::instrumentList()['second_guitar'],
                 ],
                 [
-                    'attribute' => 'bass', 
-                    'format' => 'text', 
+                    'attribute' => 'bass',
+                    'format' => 'text',
                     'label' => $searchModel::instrumentList()['bass'],
                 ],
                 [
-                    'attribute' => 'drums', 
-                    'format' => 'text', 
+                    'attribute' => 'drums',
+                    'format' => 'text',
                     'label' => $searchModel::instrumentList()['drums'],
                 ],
                 [
-                    'attribute' => 'piano', 
-                    'format' => 'text', 
+                    'attribute' => 'piano',
+                    'format' => 'text',
                     'label' => $searchModel::instrumentList()['piano'],
                 ],
                 [
-                    'attribute' => 'first_voice', 
-                    'format' => 'text', 
+                    'attribute' => 'first_voice',
+                    'format' => 'text',
                     'label' => $searchModel::instrumentList()['first_voice'],
                 ],
                 [
-                    'attribute' => 'second_voice', 
-                    'format' => 'text', 
+                    'attribute' => 'second_voice',
+                    'format' => 'text',
                     'label' => $searchModel::instrumentList()['second_voice'],
                 ],
                 [
@@ -101,8 +107,8 @@ $current_page = $page;
                     }
                 ],
                 [
-                    'attribute' => '', 
-                    'format' => 'raw', 
+                    'attribute' => '',
+                    'format' => 'raw',
                     'label' => '',
                     'value' => function ($searchModel) {
                         global $current_page;
@@ -112,8 +118,8 @@ $current_page = $page;
                     }
                 ],
                 [
-                    'attribute' => '', 
-                    'format' => 'raw', 
+                    'attribute' => '',
+                    'format' => 'raw',
                     'label' => '',
                     'value' => function ($searchModel) {
                         return '<button onclick=' . "'" . 'openPopup("delete_song_popup-' . $searchModel->id . '")' . "'" . ' class="icon_btn trash_btn">
@@ -139,7 +145,7 @@ $current_page = $page;
         ]); ?>
 
         <?= $form->errorSummary($searchModel);?>
-        
+
         <div class="group_together">
             <?= $form->field($searchModel, 'title')->label(Yii::t('app', 'Titlu')) ?>
             <?= $form->field($searchModel, 'artist')->label(Yii::t('app', 'Artist')) ?>
@@ -147,15 +153,15 @@ $current_page = $page;
         <hr>
         <div class="group_together">
             <?= $form->field($searchModel, 'first_guitar')->widget(Select2::class, [
-                'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
+                'data' => $users,
                 'options' => ['placeholder' => $searchModel::instrumentList()['first_guitar']],
                 'pluginOptions' => [
                     'allowClear' => true,
                 ],
             ])->label($searchModel::instrumentList()['first_guitar']); ?>
-            
+
             <?= $form->field($searchModel, 'second_guitar')->widget(Select2::class, [
-                'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
+                'data' => $users, // Map usernames from your user model,
                 'options' => ['placeholder' => $searchModel::instrumentList()['second_guitar']],
                 'pluginOptions' => [
                     'allowClear' => true,
@@ -164,14 +170,14 @@ $current_page = $page;
         </div>
         <div class="group_together">
             <?= $form->field($searchModel, 'bass')->widget(Select2::class, [
-                'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
+                'data' => $users, // Map usernames from your user model,
                 'options' => ['placeholder' => $searchModel::instrumentList()['bass']],
                 'pluginOptions' => [
                     'allowClear' => true,
                 ],
             ])->label($searchModel::instrumentList()['bass']); ?>
             <?= $form->field($searchModel, 'drums')->widget(Select2::class, [
-                'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
+                'data' => $users, // Map usernames from your user model,
                 'options' => ['placeholder' => $searchModel::instrumentList()['drums']],
                 'pluginOptions' => [
                     'allowClear' => true,
@@ -179,7 +185,7 @@ $current_page = $page;
             ])->label($searchModel::instrumentList()['drums']); ?>
         </div>
         <?= $form->field($searchModel, 'piano')->widget(Select2::class, [
-            'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
+            'data' => $users, // Map usernames from your user model,
             'options' => ['placeholder' => $searchModel::instrumentList()['piano']],
             'pluginOptions' => [
                 'allowClear' => true,
@@ -187,14 +193,14 @@ $current_page = $page;
         ])->label($searchModel::instrumentList()['piano']); ?>
         <div class="group_together">
             <?= $form->field($searchModel, 'first_voice')->widget(Select2::class, [
-                'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
+                'data' => $users, // Map usernames from your user model,
                 'options' => ['placeholder' => $searchModel::instrumentList()['first_voice']],
                 'pluginOptions' => [
                     'allowClear' => true,
                 ],
             ])->label($searchModel::instrumentList()['first_voice']); ?>
             <?= $form->field($searchModel, 'second_voice')->widget(Select2::class, [
-                'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
+                'data' => $users, // Map usernames from your user model,
                 'options' => ['placeholder' => $searchModel::instrumentList()['second_voice']],
                 'pluginOptions' => [
                     'allowClear' => true,
@@ -208,7 +214,7 @@ $current_page = $page;
                 'value' => '1',
                 'id' => 'is-in-concert-checkbox', // Add an ID for targeting with JS
             ])->label(Yii::t('app', 'E în concert?')); ?>
-            
+
             <?= $form->field($searchModel, 'setlist_spot')->label(Yii::t('app', 'Loc în Setlist')); ?>
             <?= $form->field($searchModel, 'state')->dropDownList([
                 '5' => $searchModel::stateList()['5'], // Gray for "Not done yet"
@@ -221,7 +227,7 @@ $current_page = $page;
                 'class' => 'custom-class',
             ])->label(Yii::t('app', 'Stare')); ?>
         </div>
-        
+
         <br>
 
         <div class="container text-center">

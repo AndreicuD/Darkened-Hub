@@ -2,22 +2,25 @@
 
 /** @var yii\web\View $this */
 /** @var yii\bootstrap5\ActiveForm $form */
-/** @var \frontend\models\ContactForm $model */
+/** @var frontend\models\ContactForm $model */
 
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 use yii\captcha\Captcha;
 
-$this->title = Yii::t('app', 'Contact Us');
+$this->title = Yii::t('app', 'Contactează-ne');
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
     <h1 class="page_title" style="text-align: center;"><?= Html::encode($this->title) ?></h1>
 
     <p class="text-center lead">
-        <?= Yii::t("app", "Pentru orice întrebare contactează-ne prin formularul de mai jos sau folosind unul din social media-urile listate.") ?>
+        <?= Yii::t("app", "Pentru orice întrebare, contactează-ne prin formularul de mai jos sau folosind social media.") ?>
     </p>
-
+    <p class="text-center lead">
+        <?= Yii::t("app", "Tot aici ne poți lăsa feedback pentru concerte.") ?>
+    </p>
+    
     <div class="row justify-content-center">
         <div style="display: inline; text-align: center; padding-bottom: 1rem; font-size: 2em;">
             <a href="https://www.instagram.com/darkened_tunes/" target="_blank" style="color: #ffffff; text-decoration: none;" class="page_title">
@@ -42,7 +45,7 @@ $this->title = Yii::t('app', 'Contact Us');
 
                 <br>
                 <div class="form-group" style="text-align: center;">
-                    <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
+                    <?= Html::submitButton(Yii::t('app', 'Submit'), ['class' => 'btn btn-primary', 'name' => 'contact-button']) ?>
                 </div>
                 <br>
 

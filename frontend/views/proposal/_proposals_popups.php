@@ -14,8 +14,8 @@ $songModel->title = $model->title;
 $songModel->artist = $model->artist;
 ?>
 <!-- erase public proposal popup -->
-<div id="delete_<?=$page?>proposal_popup-<?=$model->id?>">
-    <div class="overlay_opaque" onclick="closePopup('delete_<?=$page?>proposal_popup-<?=$model->id?>')"></div>
+<div id="delete_proposal_popup-<?=$model->id?>">
+    <div class="overlay_opaque" onclick="closePopup('delete_proposal_popup-<?=$model->id?>')"></div>
     <div class="popup">
         <h1 class="page_title"><?= Yii::t('app', 'Asta va șterge propunerea pentru: ') ?><strong><?= Html::encode($model->title) ?></strong></h1>
         <p style="text-align: center; line-height: 1.5rem; padding: 0;" class="lead"><?= Yii::t('app', 'Ești sigur că vrei să continui?') ?></p>
@@ -23,21 +23,21 @@ $songModel->artist = $model->artist;
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <button onclick="closePopup('delete_<?=$page?>proposal_popup-<?=$model->id?>')" type="button" class="btn btn-secondary"><?= Yii::t('app', 'Nu') ?></button>
+                    <button onclick="closePopup('delete_proposal_popup-<?=$model->id?>')" type="button" class="btn btn-secondary"><?= Yii::t('app', 'Nu') ?></button>
                 </div>
                 <div class="col">
-                    <a href="<?= Url::toRoute(['proposal/delete' . $page . 'proposal', 'id' => $model->id]); ?>" class="btn btn-danger"><?= Yii::t('app', 'Da') ?></a>
+                    <a href="<?= Url::toRoute(['proposal/deleteproposal', 'id' => $model->id]); ?>" class="btn btn-danger"><?= Yii::t('app', 'Da') ?></a>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<div id="update_<?=$page?>proposal_popup-<?=$model->id?>">
-    <div class="overlay_opaque" onclick="closePopup('update_<?=$page?>proposal_popup-<?=$model->id?>')"></div>
+<div id="update_proposal_popup-<?=$model->id?>">
+    <div class="overlay_opaque" onclick="closePopup('update_proposal_popup-<?=$model->id?>')"></div>
     <div class="popup">
         <h1 class="page_title"><?= Yii::t('app', 'Update Propunere') ?></h1>
-        <?php $form_update = ActiveForm::begin(['id' => 'form-'. $page . 'updateproposal'.$model->id, 'type' => ActiveForm::TYPE_FLOATING, 'action' => ['proposal/update' . $page . 'proposal', 'id' => $model->id, 'page' => 'index']]); ?>
+        <?php $form_update = ActiveForm::begin(['id' => 'form-updateproposal'.$model->id, 'type' => ActiveForm::TYPE_FLOATING, 'action' => ['proposal/updateproposal', 'id' => $model->id]]); ?>
 
         <?= $form_update->errorSummary($model);?>
 
@@ -51,7 +51,7 @@ $songModel->artist = $model->artist;
         <div class="container text-center">
             <div class="row">
                 <div class="col">
-                    <button onclick="closePopup('update_<?=$page?>proposal_popup-<?=$model->id?>')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Închide') ?></button>
+                    <button onclick="closePopup('update_proposal_popup-<?=$model->id?>')" type="button" class="btn btn-danger"><?= Yii::t('app', 'Închide') ?></button>
                 </div>
                 <div class="col">
                     <input type="submit" value="Salvează" class="btn btn-success">

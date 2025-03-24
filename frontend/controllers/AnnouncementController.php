@@ -5,9 +5,12 @@ namespace frontend\controllers;
 use frontend\models\ContactForm;
 use common\models\Concert;
 use common\models\Announcement;
+use Throwable;
 use Yii;
+use yii\db\StaleObjectException;
 use yii\web\Controller;
 use yii\filters\AccessControl;
+use yii\web\Response;
 
 /**
  * Announcement controller
@@ -22,7 +25,7 @@ class AnnouncementController extends Controller
                 'rules' => [
                     [
                         'actions' => [
-                            'index', 'createannouncement', 'updateannouncement', 'deleteannouncement',
+                            'index', 'create', 'update', 'delete',
                         ],
                         'allow' => true,
                         'roles' => ['@'],
@@ -31,6 +34,7 @@ class AnnouncementController extends Controller
             ],
         ];
     }
+
     /**
      * {@inheritdoc}
      */
@@ -54,67 +58,78 @@ class AnnouncementController extends Controller
      */
     public function actionIndex()
     {
-        $concert = new Concert();
-        $current_concert = Concert::findOne(['id' => 1]);
-        $concert_date = $concert->get_date(1);
 
         $announcement = new Announcement();
         $announcement_list = $announcement->search(Yii::$app->request->queryParams);
         $announcement_list->pagination->pageParam = 'p';
         $announcement_list->pagination->forcePageParam = 0;
-        $announcement_list->pagination->defaultPageSize = 12;
-        
+        $announcement_list->pagination->defaultPageSize = 1;
+
         return $this->render('index', [
-            'concertModel' => $concert,
-            'currentConcertModel' => $current_concert,
-            'concert_date' => $concert_date,
             'announcementModel' => $announcement,
-            'announcementList' => $announcement_list
+            'announcementList' => $announcement_list,
         ]);
     }
 
-    public function actionCreateannouncement()
+    /**
+     * Create an anouncement
+     * @return Response
+     */
+    public function actionCreate()
     {
         $model = new Announcement();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 if ($model->save()) {
-                    Yii::$app->session->setFlash('success', 'Anunțul a fost creat cu succes.');
-                    return $this->redirect(['announcement/index']);
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'Anunțul a fost creat cu succes.'));
+                    return $this->redirect(['index']);
                 } else {
-                    Yii::$app->session->setFlash('error', 'Nu s-a reușit crearea anunțului.');
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Nu s-a reușit crearea anunțului.'));
                 }
             } else {
-                Yii::$app->session->setFlash('error', 'Validare eșuată: ' . json_encode($model->getErrors()));
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Validare eșuată: ') . json_encode($model->getErrors()));
             }
         } else {
-            Yii::$app->session->setFlash('error', 'Încercarea de preluare a informației din formular a eșuat.');
+            Yii::$app->session->setFlash('error', Yii::t('app', 'Încercarea de preluare a informației din formular a eșuat.'));
         }
 
-        return $this->redirect(['announcement/index']);
+        return $this->redirect(['index']);
     }
 
-    public function actionUpdateannouncement($id)
+    /**
+     * Update an announcement
+     * @param integer $id
+     * @return Response
+     */
+    public function actionUpdate($id)
     {
         $model = Announcement::findOne(['id' => $id]);
         //$model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Anunțul a fost modificat.');
-            $this->redirect(['announcement/index']);
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Anunțul a fost modificat.'));
+            $this->redirect(['index']);
         } else {
-            Yii::$app->session->setFlash('error', 'A apărut o eroare în salvarea anunțului.');
+            Yii::$app->session->setFlash('error', Yii::t('app', 'A apărut o eroare în salvarea anunțului.'));
         }
 
-        return $this->redirect(['announcement/index']);
+        return $this->redirect(['index']);
     }
-    public function actionDeleteannouncement($id)
+
+    /**
+     * Delete an announcement
+     * @param integer $id
+     * @return void
+     * @throws Throwable
+     * @throws StaleObjectException
+     */
+    public function actionDelete($id)
     {
         $model = Announcement::findOne(['id' => $id]);
         if ($model->delete()) {
-            Yii::$app->session->setFlash('success', 'Anunțul a fost șters.');
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Anunțul a fost șters.'));
         }
 
-        $this->redirect(['announcement/index']);
+        $this->redirect(['index']);
     }
 }

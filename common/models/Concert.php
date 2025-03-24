@@ -11,12 +11,20 @@ use yii\db\Expression;
  * This is the model class for table "{{%concert}}".
  *
  * @property integer $id [int(auto increment)]
- * @property string $date [varchar(254)]
+ * @property string $date [datetime]
+ * @property integer $status [tinyint(2)]
  * @property string $title [varchar(254)]
  * @property string $description [varchar(1000)]
  */
+
+
 class Concert extends \yii\db\ActiveRecord
 {
+
+    const STATUS_DELETED = 0;
+    const STATUS_INACTIVE = 9;
+    const STATUS_ACTIVE = 10;
+    
     /**
      * @inheritdoc
      */
@@ -31,9 +39,11 @@ class Concert extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date'], 'required'],
-            [['id', 'date', 'title', 'description'], 'safe'],
-            [['id', 'date', 'title', 'description'], 'safe', 'on' => 'search'],
+            [['date'], 'required', 'on' => 'default'],
+            [['title'], 'string', 'max' => 254],
+            [['description'], 'string', 'max' => 254],
+            [['status'], 'in', 'range' => array_keys(self::statusesList())], // Validate allowed statuses
+            [['id', 'date', 'title', 'description', 'status'], 'safe', 'on' => 'search'],
         ];
     }
 
@@ -46,6 +56,19 @@ class Concert extends \yii\db\ActiveRecord
             'date' => Yii::t('app', 'Date'),
             'title' => Yii::t('app', 'Title'),
             'description' => Yii::t('app', 'Description'),
+            'status' => Yii::t('app', 'Status'),
+        ];
+    }
+
+    /**
+    * @return array the possible statuses
+    */
+    public static function statusesList(): array
+    {
+        return [
+            self::STATUS_DELETED => Yii::t('app', 'Deleted'),
+            self::STATUS_INACTIVE => Yii::t('app', 'Inactive'),
+            self::STATUS_ACTIVE => Yii::t('app', 'Active'),
         ];
     }
 
@@ -62,12 +85,12 @@ class Concert extends \yii\db\ActiveRecord
         // Base query
         $query = self::find();
 
-        
+
         // Data provider with default sorting
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort' => [
-                'defaultOrder' => ['date' => SORT_ASC],
+                'defaultOrder' => ['date' => SORT_DESC],
             ],
         ]);
 
@@ -81,6 +104,18 @@ class Concert extends \yii\db\ActiveRecord
 
         return $dataProvider;
     }
+
+    /**
+     * Sets the status to inactive for all concerts.
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public static function set_inactive_all(): void {
+        
+        Concert::updateAll(['status' => Concert::STATUS_INACTIVE]);
+    }    
 
     public function get_date($id) {
         return self::findOne(['id' => $id])->date;

@@ -1,5 +1,8 @@
 <?php
 return [
+    'sourceLanguage' => 'en',
+    'language' => 'ro',
+    'timeZone' => 'Europe/Bucharest',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -8,11 +11,6 @@ return [
     'modules' => [
         'gridview' =>  [
             'class' => '\kartik\grid\Module'
-            // enter optional module parameters below - only if you need to  
-            // use your own export download action or custom translation 
-            // message source
-            // 'downloadAction' => 'gridview/export/download',
-            // 'i18n' => []
         ]
     ],
     'components' => [
@@ -23,6 +21,32 @@ return [
             'class' => 'yii\rbac\DbManager',
             'cache' => 'cache',
         ],
+        'i18n' => [
+            'translations' => [
+                'yii' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'sourceLanguage' => 'en-US',
+                    'basePath' => '@app/translations'
+                ],
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/translations',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+                'kv*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/translations',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'kvgrid' => 'kvgrid.php',
+                    ],
+                ],
+            ],
+        ],
         'formatter' => [
             'class' => 'yii\i18n\Formatter',
             'dateFormat' => 'dd/M/Y',
@@ -32,6 +56,7 @@ return [
             'defaultTimeZone' => 'Europe/Bucharest', // time zone
             'decimalSeparator' => ',',
             'thousandSeparator' => '.',
+            'currencyCode' => 'RON',
         ],
     ],
 ];

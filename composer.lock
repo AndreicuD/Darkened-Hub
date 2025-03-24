@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "34f65c77aba95086f4805fb9418ef947",
+    "content-hash": "6979eaafaad8b221ee42aeb9fc55c020",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -1180,7 +1180,7 @@
         },
         {
             "name": "kartik-v/yii2-widget-fileinput",
-            "version": "v1.1.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-fileinput.git",
@@ -1196,6 +1196,7 @@
                 "kartik-v/bootstrap-fileinput": ">=5.5.0",
                 "kartik-v/yii2-krajee-base": ">=3.0.5"
             },
+            "default-branch": true,
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
@@ -7181,6 +7182,7 @@
         "kartik-v/yii2-grid": 20,
         "kartik-v/yii2-widget-datepicker": 20,
         "kartik-v/yii2-widget-datetimepicker": 20,
+        "kartik-v/yii2-widget-fileinput": 20,
         "kartik-v/yii2-widgets": 20
     },
     "prefer-stable": false,

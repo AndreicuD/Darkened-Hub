@@ -1,6 +1,6 @@
 <?php
 
-/** @var \yii\web\View $this */
+/** @var View $this */
 /** @var string $content */
 
 use common\widgets\Alert;
@@ -9,6 +9,7 @@ use yii\bootstrap5\Breadcrumbs;
 use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
+use yii\web\View;
 
 AppAsset::register($this);
 ?>
@@ -62,25 +63,27 @@ VANTA.FOG({
         'brandImage' => '/img/logo-white.png',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark',
+            'class' => 'navbar '.(Yii::$app->requestedRoute == 'site/index' ? 'navbar-index ' : '').'navbar-expand-md navbar-dark',
+			'id' => 'navbar',
         ],
     ]);
     if (Yii::$app->user->isGuest) {
         $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Concerte', 'url' => ['/site/concerts']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-            //['label' => 'Signup', 'url' => ['/user/signup']],
+            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
+            ['label' => Yii::t('app', 'Concerts'), 'url' => ['/site/concerts']],
+            ['label' => Yii::t('app', 'Despre noi'), 'url' => ['/site/about']],
+            ['label' => Yii::t('app', 'Contactează-ne'), 'url' => ['/site/contact']],
         ];
     } else {
         $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Propuneri Publice', 'url' => ['/proposal/public_proposals']],
-            ['label' => 'Propuneri', 'url' => ['/proposal/proposals']],
-            ['label' => 'Informații Concert și Anunțuri', 'url' => ['/announcement/index']],
-            ['label' => 'Concert', 'url' => ['/song/concert']],
-            ['label' => 'Melodii', 'url' => ['/song/index']],
+            ['label' => Yii::t('app', 'Home'), 'url' => ['/site/index']],
+            ['label' => Yii::t('app', 'Propuneri Publice'), 'url' => ['/publicproposal/proposals']],
+            ['label' => Yii::t('app', 'Propuneri'), 'url' => ['/proposal/proposals']],
+            ['label' => Yii::t('app', 'Anunțuri'), 'url' => ['/announcement/index']],
+            ['label' => Yii::t('app', 'Informații concerte'), 'url' => ['/concert/index']],
+            ['label' => Yii::t('app', 'Statistici'), 'url' => ['/song/stats']],
+            ['label' => Yii::t('app', 'Concert'), 'url' => ['/song/concert']],
+            ['label' => Yii::t('app', 'Melodii'), 'url' => ['/song/index']],
         ];
     }
 
@@ -88,29 +91,27 @@ VANTA.FOG({
         'options' => ['class' => 'navbar-nav ms-auto mb-2 mb-md-0'],
         'items' => $menuItems,
     ]);
-    if (Yii::$app->user->isGuest) {
-        echo Html::tag('div',Html::a('Login',['/user/login'],['class' => ['btn btn-link login text-decoration-none']]),['class' => ['d-flex login_logoutbutton']]);
-    } else {
-        echo '<div class="btn-group">';
-            echo '<a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">';
-                echo Yii::$app->user->identity->username;
-            echo '</a>';
-            echo '<ul class="dropdown-menu dropdown-menu-lg-end">';
-                echo '<li><a class="dropdown-item" href="/user/index">Pagina mea</a></li>';
-                echo '<li><a class="dropdown-item" href="/user/stats">Statistici</a></li>';
-                echo '<li><hr class="dropdown-divider"></li>';
-                echo '<li><a class="dropdown-item" href="/user/settings">Setări</a></li>';
-                echo Html::tag('li',Html::a('Logout',['/user/logout'],['class' => ['dropdown-item logout text-decoration-none']]));
-            echo '</ul>';
-        echo '</div>';
-        //echo Html::tag('div',Html::a('Logout (' . Yii::$app->user->identity->username . ')',['/user/logout'],['class' => ['btn btn-link logout text-decoration-none']]),['class' => ['d-flex login_logoutbutton']]);
-    }
-    NavBar::end();
-    ?>
+    if (Yii::$app->user->isGuest) { ?>
+        <div class="d-flex login_logoutbutton">
+            <?= Html::a(Yii::t('app', 'Autentificare'), ['/user/login'], ['class' => ['btn btn-link login text-decoration-none']]) ?>
+        </div>
+    <?php } else { ?>
+        <div class="btn-group">
+            <a class="btn btn-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                <?= Yii::$app->user->identity->username; ?>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-lg-end">
+                <li><a class="dropdown-item" href="/user/settings"><?= Yii::t('app', 'Setări'); ?></a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item logout text-decoration-none" href="/user/logout"><?= Yii::t('app', 'Logout'); ?></a></li>
+            </ul>
+        </div>
+    <?php } ?>
+    <?php NavBar::end(); ?>
 </header>
 
 <main role="main" class="flex-shrink-0">
-    <div class="container">
+    <div class="<?= Yii::$app->requestedRoute == 'site/index' ? '' : 'container' ?>">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -122,8 +123,7 @@ VANTA.FOG({
 <footer class="footer footer-dark mt-auto py-3 text-muted">
     <div class="container">
         <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
-        <p class="float-end">Made With Love By Huțanu Andrei 💜🤘</p>
-        <!--<p class="float-end"><?= Yii::powered() ?></p>-->
+        <p class="footer-love"><?= Yii::t('app', 'Realizat de Huțanu Andrei 💜🤘') ?></p>
     </div>
 </footer>
 

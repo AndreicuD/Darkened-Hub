@@ -179,12 +179,12 @@ class Song extends \yii\db\ActiveRecord
     {
         return [
             'first_guitar' => Yii::t('app', 'Prima Chitara'),
-            'second_guitar' => Yii::t('app', 'A Doua Chitara'),
+            'second_guitar' => Yii::t('app', 'Second guitar'),
             'bass' => Yii::t('app', 'Bas'),
             'drums' => Yii::t('app', 'Tobe'),
             'piano' => Yii::t('app', 'Pian'),
             'first_voice' => Yii::t('app', 'Prima Voce'),
-            'second_voice' => Yii::t('app', 'A Doua Voce'),
+            'second_voice' => Yii::t('app', 'Second voice'),
         ];
     }
 }

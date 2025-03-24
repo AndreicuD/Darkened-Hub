@@ -37,9 +37,9 @@ class Announcement extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'description'], 'required', 'on' => 'default'],
-            [['title', 'description'], 'string', 'max' => 254],
-            [['title', 'description'], 'safe', 'on' => 'search'],
-            [['title', 'description'], 'safe'],
+            [['title'], 'string', 'max' => 254],
+            [['description'], 'string'],
+            [['title', 'description', 'created_at', 'updated_at'], 'safe', 'on' => 'search'],
         ];
     }
 
@@ -52,6 +52,8 @@ class Announcement extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'title' => Yii::t('app', 'Title'),
             'description' => Yii::t('app', 'Description'),
+            'created_at' => Yii::t('app', 'Created at'),
+            'updated_at' => Yii::t('app', 'Updated at'),
         ];
     }
 
@@ -63,8 +65,6 @@ class Announcement extends \yii\db\ActiveRecord
         return [
             'timestamp' => [
                 'class' => TimestampBehavior::class,
-                'createdAtAttribute' => 'created_at',
-                'updatedAtAttribute' => 'updated_at',
                 'value' => new Expression('NOW()'),
             ],
         ];
@@ -90,17 +90,17 @@ class Announcement extends \yii\db\ActiveRecord
             ]
         ]);
 
+        if ($full) {
+            $dataProvider->setPagination(false);
+        } else {
+            $dataProvider->pagination->pageSize = ($this->page_size > 0) ? $this->page_size : 20;
+        }
+
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
         }
 
     // Filter conditions
-
-        if ($full) {
-            $dataProvider->setPagination(false);
-        } else {
-            $dataProvider->pagination->pageSize = ($this->page_size > 0) ? $this->page_size : 10;
-        }
 
         $query->andFilterWhere(['like', 'title', $this->title]);
         $query->andFilterWhere(['like', 'artist', $this->artist]);

@@ -11,15 +11,13 @@ use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 
 $this->registerJsFile('/js/popup.js', ['depends' => [\yii\web\JqueryAsset::class]]);
-global $current_page;
-$current_page = $page;
 ?>
 
 <div class="table_wrapper">       
     <?php
         echo GridView::widget([
             'dataProvider' => $dataProvider,
-            'layout' => '{items}{pager}{export}',
+            'layout' => '{toggleData}{export}{pager}{items}{pager}',
             'tableOptions' => [
                 'class' => 'songs_table',
                 'id' => 'songs_table',
@@ -30,7 +28,7 @@ $current_page = $page;
             'responsiveWrap' => false,
             'hover' => false,
             'export' => [
-                'label' => 'Export data',
+                'label' => Yii::t("app", "Exportă datele"),
                 'showConfirmAlert' => false,
                 'fontAwesome' => true,
                 'options' => ['class' => 'btn-primary'],
@@ -71,7 +69,7 @@ $current_page = $page;
                     'format' => 'raw', 
                     'label' => '',
                     'value' => function ($searchModel) {
-                        return '<button onclick="openPopup(' . "'" . 'sendtosetlist_popup-' . $searchModel->id .  "'" . ')" class="icon_btn">
+                        return '<button onclick="location.href=' . "'" . 'sendtosetlist?id=' . $searchModel->id .  "'" . '"' . ' class="icon_btn">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-telegram">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                         <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
@@ -85,7 +83,7 @@ $current_page = $page;
                     'label' => '',
                     'value' => function ($searchModel) {
                         global $current_page;
-                        return '<button onclick=' . "'" . 'openPopup("update_' . $current_page . 'proposal_popup-' . $searchModel->id . '")' . "'" . '"' . ' class="icon_btn">
+                        return '<button onclick=' . "'" . 'openPopup("update_proposal_popup-' . $searchModel->id . '")' . "'" . '"' . ' class="icon_btn">
                                     <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-adjustments"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M6 4v4" /><path d="M6 12v8" /><path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M12 4v10" /><path d="M12 18v2" /><path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M18 4v1" /><path d="M18 9v11" /></svg>
                                 </button>';
                     }
@@ -96,7 +94,7 @@ $current_page = $page;
                     'label' => '',
                     'value' => function ($searchModel) {
                         global $current_page;
-                        return '<button onclick=' . "'" . 'openPopup("delete_' . $current_page . 'proposal_popup-' . $searchModel->id . '")' . "'" . ' class="icon_btn trash_btn">
+                        return '<button onclick=' . "'" . 'openPopup("delete_proposal_popup-' . $searchModel->id . '")' . "'" . ' class="icon_btn trash_btn">
                                     <svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
                                 </button>';
                     }
@@ -148,7 +146,7 @@ $current_page = $page;
 <?= ListView::widget([
     'dataProvider' => $dataProvider,
     'itemView' => '_proposals_popups',
-    'viewParams' => ['page' => $page, 'songModel' => $songModel, 'user' => $user,],
+    'viewParams' => ['songModel' => $songModel, 'user' => $user,],
     'options' => [
         'tag' => 'div',
     ],

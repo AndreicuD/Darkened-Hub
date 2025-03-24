@@ -5,7 +5,7 @@
 /** @var string $message */
 /** @var Exception $exception */
 
-use yii\helpers\Html;
+use yii\bootstrap5\Html;
 
 $this->title = $name;
 ?>
@@ -18,10 +18,12 @@ $this->title = $name;
     </div>
 
     <p>
-        The above error occurred while the Web server was processing your request.
+        Eroarea a apărut în timp ce serverul procesa cererea.
+        <!-- <?= Yii::t('app', "The above error occurred while the Web server was processing your request.") ?> -->
     </p>
     <p>
-        Please contact us if you think this is a server error. Thank you.
+        Contacteză-ne dacă crezi că este o eroare a serverului. Mulțumim!
+        <!-- <?= Yii::t('app', "Please contact us if you think this is a server error. Thank you.") ?> -->
     </p>
 
 </div>
