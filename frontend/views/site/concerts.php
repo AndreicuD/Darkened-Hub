@@ -37,15 +37,7 @@ $this->title = Yii::t('app', 'Concerts');
             //var_dump($date1 > $date2);
         ?>
         <?php if($concert && ($concert->title || $concert->description)) { ?>
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;">
-=======
-            <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;" id="concert-title">
->>>>>>> Stashed changes
-=======
-            <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;" id="concert-title">
->>>>>>> Stashed changes
+            <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;" id="concert_title">
                 <div class="flex-div" style="min-height: fit-content;">
                     <h2 style="text-align: center; padding-top: 1em; font-weight: bold; font-size: 3em;"><?= $concert->title ?? ''; ?></h2>
                 </div>
@@ -129,16 +121,18 @@ $this->title = Yii::t('app', 'Concerts');
             <h3 class="page_title"><?= Yii::t('app', 'Concertul Trecut') ?></h3>
             <div class="announcement noto-sans-500">
                 <p class="announcement-title" style="text-align: center; margin: 0; border-radius: 10px;">
+                    <?php if (!empty($last_concert)) { ?>
                     <?php 
                         echo Html::encode($last_concert->date);
                         if($last_concert->title) {
                             echo ' - ' . $last_concert->title;
                         }
                     ?>
+                    <?php } ?>
                 </p>
                 <div class="announcement-body">
                     <?php 
-                        if($last_concert->description) {
+                        if(!empty($last_concert->description)) {
                             echo '<hr style="padding: 0; margin: 0;">';
                             echo '<p class="announcement-text" style="text-align: center;">';
                             echo $last_concert->description;

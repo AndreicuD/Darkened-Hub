@@ -37,7 +37,7 @@ $this->title = Yii::t('app', 'Informații Concert');
 
                 <?= $form_create->errorSummary($concertModel);?>
 
-                <?= $form_create->field($concertModel, 'title')->label(Yii::t('app', 'Titlu')) ?>
+                <?= $form_create->field($concertModel, 'title')->textInput()->label(Yii::t('app', 'Titlu')) ?>
 
                 <?= $form_create->field($concertModel, 'description')->textarea(['rows' => 2, 'style' => 'min-height: 80px; overflow: auto;'])->label(Yii::t('app', 'Descrierea concertului')) ?>
 
@@ -76,7 +76,7 @@ $this->title = Yii::t('app', 'Informații Concert');
     <?php
     echo GridView::widget([
         'dataProvider' => $concerts,
-        'layout' => '{toggleData}{export}{pager}{items}{pager}',
+        'layout' => '{toggleData}{export}{pager}{items}',
         'tableOptions' => [
             'class' => 'songs_table',
             'id' => 'songs_table',

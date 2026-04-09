@@ -36,9 +36,9 @@ class ChangePasswordForm extends Model
     public function attributeLabels()
     {
         return [
-            'current_password' => Yii::t('app', 'Your current password'),
-            'new_password' => Yii::t('app', 'The new password'),
-            'confirm_password' => Yii::t('app', 'Confirm the new password'),
+            'current_password' => Yii::t('app', 'Parola curentă'),
+            'new_password' => Yii::t('app', 'Parola nouă'),
+            'confirm_password' => Yii::t('app', 'Confirmă parola nouă'),
         ];
     }
 
@@ -50,7 +50,7 @@ class ChangePasswordForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if (!$user || !Yii::$app->security->validatePassword($this->current_password, $user->password_hash)) {
-                $this->addError($attribute, Yii::t('app', 'The current password is wrong'));
+                $this->addError($attribute, Yii::t('app', 'Parola curentă este greșită.'));
             }
         }
     }

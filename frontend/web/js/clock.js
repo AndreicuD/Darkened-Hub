@@ -64,8 +64,8 @@ function updateDate() {
 }
 
 function no_concert() {
-    if(document.getElementById("concert-title")) {
-        document.getElementById("concert-title").style = "display:none;"
+    if(document.getElementById("concert_title")) {
+        document.getElementById("concert_title").style = "display:none;"
     }
     if(document.getElementById("date")) {
         document.getElementById("date").style = "display:none;";

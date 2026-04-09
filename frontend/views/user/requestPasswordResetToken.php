@@ -7,13 +7,13 @@
 use yii\bootstrap5\Html;
 use yii\bootstrap5\ActiveForm;
 
-$this->title = 'Request password reset';
+$this->title = 'Cerere de resetare parolă';
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-request-password-reset">
     <h1 class="text-center page_title"><?= Html::encode($this->title) ?></h1>
 
-    <p class="text-center">Please fill out your email. A link to reset password will be sent there.</p>
+    <p class="text-center"><?= Yii::t('app', 'Te rog să introduci adresă de email. Un link de resetare al parolei va fi trimis.') ?></p>
 
     <div class="row justify-content-center">
         <div class="col-lg-6">

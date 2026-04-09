@@ -2,6 +2,7 @@
 
 /** @var yii\web\View $this */
 
+use Yii;
 use yii\bootstrap5\Html;
 use yii\helpers\Url;
 use kartik\widgets\ActiveForm;
@@ -40,7 +41,7 @@ $this->title = 'Setări';
 
             <hr>
 
-            <p class="small_gray_text">Schimbă Parola</p>
+            <p class="small_gray_text"><?= Yii::t('app', 'Schimbă Parola') ?></p>
             <!-- CHANGE PASSWORD FORM -->
             <?php $passwordForm = ActiveForm::begin([
                 'id' => 'form-change-password',
@@ -54,7 +55,7 @@ $this->title = 'Setări';
             <?= $passwordForm->field($changePasswordModel, 'current_password')->passwordInput()->label('Parola Curentă') ?>
             <?= $passwordForm->field($changePasswordModel, 'new_password')->passwordInput()->label('Parola Nouă') ?>
             <?= $passwordForm->field($changePasswordModel, 'confirm_password')->passwordInput()->label('Confirmă Parola Nouă') ?>
-            <p class="small_gray_text">Ți-ai uitat parola curentă? Schimb-o <?=Html::a('aici', Url::to(['user/request-password-reset'])); ?></p>
+            <p class="small_gray_text"><?= Yii::t('app', 'Ți-ai uitat parola curentă? Schimb-o ') ?><?=Html::a('aici', Url::to(['user/request-password-reset'])); ?></p>
 
             <input type="submit" value="Schimbă Parola" class="btn btn-success">
             <?php ActiveForm::end(); ?>

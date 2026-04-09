@@ -73,19 +73,21 @@ class SiteController extends Controller
     {
         $model = new PublicProposal();
         $dataProvider = $model->searchLatest();
-
-        $concert = Concert::findOne(['status' => Concert::STATUS_ACTIVE]);
         $next_ones = (new Concert())->search([]);
-        $next_ones->query
-            ->andWhere('date > :date', [':date' => $concert->date])
-            ->limit(3)
-            ->orderBy(['date'=> SORT_ASC]);
+        $last_one = null;
         $public_prop = new PublicProposal();
-        $last_one = (new Concert())->find()
-            ->where('date < :date', [':date' => $concert->date])
-            ->orderBy(['date'=> SORT_DESC])
-            ->one();
-        $public_prop = new PublicProposal();
+
+        if ($concert = Concert::findOne(['status' => Concert::STATUS_ACTIVE])) {
+            $next_ones->query
+                ->andWhere('date > :date', [':date' => $concert->date ?? null])
+                ->orderBy(['date'=> SORT_ASC])
+                ->limit(3);
+            
+            $last_one = (new Concert())->find()
+                ->where('date < :date', [':date' => $concert->date ?? null])
+                ->orderBy(['date'=> SORT_DESC])
+                ->one();
+        }
 
         return $this->render('concerts', [
             'model' => $model,

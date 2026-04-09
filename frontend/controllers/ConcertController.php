@@ -30,7 +30,7 @@ class ConcertController extends Controller
     }
 
     /**
-     * Displays index page for announcements.
+     * Displays index page for concerts.
      *
      * @return mixed
      */
@@ -40,12 +40,11 @@ class ConcertController extends Controller
         $current_concert = Concert::findOne([
             'status' => Concert::STATUS_ACTIVE,
         ]);
-        $concert_date = $current_concert->date ?? null;
 
         $concerts = $concert->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'concertModel' => $concert,
+            'concertModel' => new Concert(),
             'currentConcertModel' => $current_concert,
 
             'concert' => $current_concert,

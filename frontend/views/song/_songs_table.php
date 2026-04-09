@@ -26,15 +26,7 @@ $current_page = $page;
     <?php
         echo GridView::widget([
             'dataProvider' => $dataProvider,
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-            'layout' => '{toggleData}{export}{pager}{items}{pager}',
-=======
             'layout' => '{toggleData}{export}{pager}{items}',
->>>>>>> Stashed changes
-=======
-            'layout' => '{toggleData}{export}{pager}{items}',
->>>>>>> Stashed changes
             'tableOptions' => [
                 'class' => 'songs_table',
                 'id' => 'songs_table',

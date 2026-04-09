@@ -30,11 +30,11 @@ class VerifyEmailForm extends Model
     public function __construct($token, array $config = [])
     {
         if (empty($token) || !is_string($token)) {
-            throw new InvalidArgumentException(Yii::t('app', 'Verify email token cannot be blank.'));
+            throw new InvalidArgumentException(Yii::t('app', 'Tokenul de verificare al email-ului nu poate fi gol.'));
         }
         $this->_user = User::findByVerificationToken($token);
         if (!$this->_user) {
-            throw new InvalidArgumentException(Yii::t('app', 'Wrong verify email token.'));
+            throw new InvalidArgumentException(Yii::t('app', 'Token de verificare al email-ului greșit.'));
         }
         parent::__construct($config);
     }

@@ -12,14 +12,14 @@ $this->title = Yii::t('app', 'Signup');
     <h1 class="text-center page_title"><?= Html::encode($this->title) ?></h1>
 
     <!--<p class="text-center text-danger lead"><?= Yii::t('app', "This won't do anything if you aren't in the club.") ?></p>-->
-    <p class="text-center text-danger lead"><?= Yii::t('app', "Daca nu esti din club, incerci degeaba.") ?></p>
+    <p class="text-center text-danger lead"><?= Yii::t('app', "Dacă nu ești din club, încerci inutil.") ?></p>
 
     <div class="row justify-content-center">
         <div class="col-lg-6">
             <?php $form = ActiveForm::begin(['id' => 'form-signup', 'layout' => 'floating']); ?>
 
                 <?= $form->field($model, 'email')->label(Yii::t('app', 'Email')) ?>
-                <?= $form->field($model, 'password')->passwordInput()->label(Yii::t('app', 'Password')) ?>
+                <?= $form->field($model, 'password')->passwordInput()->label(Yii::t('app', 'Parolă')) ?>
 
                 <?= $form->field($model, 'username')->label(Yii::t('app', 'Username')) ?>
 

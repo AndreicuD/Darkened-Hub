@@ -31,7 +31,7 @@ class SignupForm extends Model
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 254],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Această adresă de email este deja utilizată.'],
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
             ['username', 'required'],
@@ -48,14 +48,14 @@ class SignupForm extends Model
         return [
             'username' => Yii::t('app', 'Username'),
             'email' => Yii::t('app', 'Email'),
-            'firstname' => Yii::t('app', 'First name'),
-            'lastname' => Yii::t('app', 'Last name'),
+            'firstname' => Yii::t('app', 'Prenume'),
+            'lastname' => Yii::t('app', 'Nume'),
             'sex' => Yii::t('app', 'Sex'),
             'phone' => Yii::t('app', 'Phone'),
-            'birth_date' => Yii::t('app', 'Birth date'),
+            'birth_date' => Yii::t('app', 'Data de naștere'),
             'status' => Yii::t('app', 'Status'),
-            'password' => Yii::t('app', 'Password'),
-            'password_confirmation' => Yii::t('app', 'Password confirmation'),
+            'password' => Yii::t('app', 'Parolă'),
+            'password_confirmation' => Yii::t('app', 'Confirmă parola'),
         ];
     }
 
@@ -102,7 +102,7 @@ class SignupForm extends Model
             )
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' robot'])
             ->setTo($this->email)
-            ->setSubject(Yii::t('app', 'Account registration at ') . Yii::$app->name)
+            ->setSubject(Yii::t('app', 'Înregistrarea unui cont în ') . Yii::$app->name)
             ->send();
     }
 }
