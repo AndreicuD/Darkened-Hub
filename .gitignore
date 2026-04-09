@@ -30,4 +30,7 @@ phpunit.phar
 /.vagrant
 /.VSCodeCounter
 ce-e-modificat.txt
+<<<<<<< Updated upstream
 /frontend/web/img/user-icons
+=======
+>>>>>>> Stashed changes

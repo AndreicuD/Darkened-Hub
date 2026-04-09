@@ -124,7 +124,11 @@ VANTA.FOG({
     <div class="container">
         <p class="float-start">&copy; <?= Html::encode(Yii::$app->name) ?> <?= date('Y') ?></p>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
         <p class="footer-love"><?= Yii::t('app', 'Realizat de Huțanu Andrei 💜🤘') ?></p>
+=======
+        <p class="footer-love"><?= Yii::t('app', 'Realizat de Huțanu Andrei și Chiriac Cătălin 💜🤘') ?></p>
+>>>>>>> Stashed changes
 =======
         <p class="footer-love"><?= Yii::t('app', 'Realizat de Huțanu Andrei și Chiriac Cătălin 💜🤘') ?></p>
 >>>>>>> Stashed changes

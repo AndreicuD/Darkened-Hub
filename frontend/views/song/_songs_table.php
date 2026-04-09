@@ -27,7 +27,11 @@ $current_page = $page;
         echo GridView::widget([
             'dataProvider' => $dataProvider,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             'layout' => '{toggleData}{export}{pager}{items}{pager}',
+=======
+            'layout' => '{toggleData}{export}{pager}{items}',
+>>>>>>> Stashed changes
 =======
             'layout' => '{toggleData}{export}{pager}{items}',
 >>>>>>> Stashed changes

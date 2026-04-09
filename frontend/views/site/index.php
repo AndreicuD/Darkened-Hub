@@ -71,7 +71,11 @@ $this->title = Yii::t('app', 'Darkened Tunes');
                     ?>
                     <?php if($concert && ($concert->title || $concert->description)) { ?>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                         <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;">
+=======
+                        <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;" id="concert-title">
+>>>>>>> Stashed changes
 =======
                         <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;" id="concert-title">
 >>>>>>> Stashed changes
@@ -91,14 +95,20 @@ $this->title = Yii::t('app', 'Darkened Tunes');
             </div>
             <div class="flex-div">
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <a href="<?= Url::toRoute(['site/concerts']); ?>" class="btn btn-primary" style="margin-bottom: 1em;"><?= Yii::t('app', 'Află mai multe aici!') ?></a>
                 <p class="noto-sans-500 section-text"><?= Yii::t('app', 'Ai o propunere pentru următoarele concerte?') ?></p>
 =======
+=======
+>>>>>>> Stashed changes
                 <p class="noto-sans-500 section-text glow_text concert_text">
                     <?= Yii::t('app', 'Ai o propunere pentru următoarele concerte?') ?>
                     <br>
                     <?= Yii::t('app', 'Pentru mai multe informații apasă')?> <a href="<?= Url::toRoute(['site/concerts']); ?>"><?= Yii::t('app', 'aici!') ?></a>
                 </p>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                 <div class="about-wrapper">
                     <div class="about-text">

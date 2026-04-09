@@ -32,6 +32,10 @@ class UploadAvatarForm extends Model
         if ($this->validate()) {
             $userId = Yii::$app->user->id;
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 =======
 
 >>>>>>> Stashed changes

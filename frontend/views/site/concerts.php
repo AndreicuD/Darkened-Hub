@@ -38,7 +38,11 @@ $this->title = Yii::t('app', 'Concerts');
         ?>
         <?php if($concert && ($concert->title || $concert->description)) { ?>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;">
+=======
+            <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;" id="concert-title">
+>>>>>>> Stashed changes
 =======
             <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;" id="concert-title">
 >>>>>>> Stashed changes

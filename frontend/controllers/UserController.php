@@ -277,6 +277,76 @@ class UserController extends Controller
 
 
     /**
+     * settings page
+     * @return string
+     */
+    public function actionSettings()
+    {
+        $user = User::findOne(['id' => Yii::$app->user->id]);
+        $changePasswordModel = new ChangePasswordForm();
+        $uploadModel = new UploadAvatarForm();
+
+        if ($user->load(Yii::$app->request->post())) {
+            if ($user->validate()) {
+                if ($user->save()) {
+                    Yii::$app->session->setFlash('success', Yii::t('app', 'Informațiile au fost modificate.'));
+                } else {
+                    Yii::$app->session->setFlash('error', Yii::t('app', 'Nu s-a reușit modificarea informațiilor.'));
+                }
+            } else {
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Validare eșuată: ') . json_encode($user->getErrors()));
+            }
+        }
+
+        return $this->render('settings', [
+            'userModel' => $user,
+            'changePasswordModel' => $changePasswordModel,
+            'uploadModel' => $uploadModel,
+        ]);
+    }
+
+
+    /**
+     * change the password
+     * @return Response
+     */
+    public function actionChangePassword()
+    {
+        $model = new ChangePasswordForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->changePassword()) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Parola a fost schimbată cu succes.'));
+            return $this->redirect(['user/settings']);
+        }
+
+        Yii::$app->session->setFlash('error', Yii::t('app', 'Parola nu a fost schimbată. Verifică datele introduse.'));
+        return $this->redirect(['user/settings']);
+    }
+
+    /**
+     * upload an avatar
+     * @return Response
+     */
+    public function actionUploadAvatar()
+    {
+        $model = new UploadAvatarForm();
+
+        if (Yii::$app->request->isPost) {
+
+            $model->avatar = UploadedFile::getInstance($model, 'avatar');
+
+            if ($model->upload()) {
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Poza de profil a fost actualizată cu succes.'));
+            } else {
+                Yii::$app->session->setFlash('error', Yii::t('app', 'Eroare la încărcarea imaginii.'));
+            }
+        }
+
+        return $this->redirect(['user/settings']);
+    }
+
+
+    /**
      * Logs in a user.
      *
      * @return mixed
