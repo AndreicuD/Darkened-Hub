@@ -28,3 +28,5 @@ phpunit.phar
 
 # vagrant runtime
 /.vagrant
+/.VSCodeCounter
+ce-e-modificat.txt
