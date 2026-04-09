@@ -506,7 +506,17 @@ a.desc:after {
 	margin: 0;
 	line-height:0.99;
 }
+.concert_text {
+	font-weight: bold;
+	font-size: 2em;
+}
 @media(max-width: 767px) {
+	.page_title {
+		font-size: calc(1.375rem + 1.5vw);
+	}
+	.concert_text {
+		font-size: 1.5em;
+	}
 	.clock_text {
 		font-size: 10vw;
 		padding-bottom: 1rem;
@@ -728,6 +738,11 @@ a.desc:after {
 		text-shadow: 0px 0px 50px #5b5597;
 		font-size: 4em;
 	}
+	.index-section {
+		padding-top: 20%;
+		padding-left: 5%;
+		padding-right: 5%;
+	}
 	.index-second-title {
 		text-align: right;
 	}
@@ -754,8 +769,11 @@ a.desc:after {
 		padding: 0 0% 10% 0%;
 	}
 	.section-title {
-		text-align: right !important;
+		text-align: center;
 		font-size: 3em;
+	}
+	.index-second-title {
+		text-align: center;
 	}
 	.about-us-index .section-text {
 		text-align: justify;

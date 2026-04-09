@@ -37,7 +37,11 @@ $this->title = Yii::t('app', 'Concerts');
             //var_dump($date1 > $date2);
         ?>
         <?php if($concert && ($concert->title || $concert->description)) { ?>
+<<<<<<< Updated upstream
             <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;">
+=======
+            <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;" id="concert-title">
+>>>>>>> Stashed changes
                 <div class="flex-div" style="min-height: fit-content;">
                     <h2 style="text-align: center; padding-top: 1em; font-weight: bold; font-size: 3em;"><?= $concert->title ?? ''; ?></h2>
                 </div>

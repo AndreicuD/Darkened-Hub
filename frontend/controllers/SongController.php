@@ -181,6 +181,10 @@ class SongController extends Controller
             'state3count_concert' => $state3count_concert,
             'state4count_concert' => $state4count_concert,
             'state5count_concert' => $state5count_concert,
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             'state1count_all' => $state1count_all,
             'state2count_all' => $state2count_all,
             'state3count_all' => $state3count_all,

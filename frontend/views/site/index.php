@@ -70,7 +70,11 @@ $this->title = Yii::t('app', 'Darkened Tunes');
                         //var_dump($date1 > $date2);
                     ?>
                     <?php if($concert && ($concert->title || $concert->description)) { ?>
+<<<<<<< Updated upstream
                         <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;">
+=======
+                        <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;" id="concert-title">
+>>>>>>> Stashed changes
                             <div class="flex-div" style="min-height: fit-content;">
                                 <h2 style="text-align: center; padding-top: 1em; font-weight: bold; font-size: 3em;"><?= $concert->title ?? ''; ?></h2>
                             </div>
@@ -86,8 +90,16 @@ $this->title = Yii::t('app', 'Darkened Tunes');
                 </div>
             </div>
             <div class="flex-div">
+<<<<<<< Updated upstream
             <a href="<?= Url::toRoute(['site/concerts']); ?>" class="btn btn-primary" style="margin-bottom: 1em;"><?= Yii::t('app', 'Află mai multe aici!') ?></a>
                 <p class="noto-sans-500 section-text"><?= Yii::t('app', 'Ai o propunere pentru următoarele concerte?') ?></p>
+=======
+                <p class="noto-sans-500 section-text glow_text concert_text">
+                    <?= Yii::t('app', 'Ai o propunere pentru următoarele concerte?') ?>
+                    <br>
+                    <?= Yii::t('app', 'Pentru mai multe informații apasă')?> <a href="<?= Url::toRoute(['site/concerts']); ?>"><?= Yii::t('app', 'aici!') ?></a>
+                </p>
+>>>>>>> Stashed changes
                 <div class="about-wrapper">
                     <div class="about-text">
                         <h3 class="page_title"><?= Yii::t('app', 'Trimite o propunere:') ?></h3>

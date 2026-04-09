@@ -31,6 +31,10 @@ class UploadAvatarForm extends Model
     {
         if ($this->validate()) {
             $userId = Yii::$app->user->id;
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             // Use an absolute path instead of a relative one
             $uploadPath = Yii::getAlias('@frontend/web/img/user-icons/');
             $extension = strtolower(pathinfo($this->avatar->name, PATHINFO_EXTENSION));
