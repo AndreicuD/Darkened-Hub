@@ -116,22 +116,24 @@ class SongController extends Controller
                     'or',
                     ['first_guitar' => $userName],
                     ['second_guitar' => $userName],
-                    ['drums' => $userName],
                     ['bass' => $userName],
+                    ['drums' => $userName],
+                    ['first_piano' => $userName],
+                    ['second_piano' => $userName],
                     ['first_voice' => $userName],
                     ['second_voice' => $userName],
-                    ['piano' => $userName]
                 ])->count();
             $count_concert = Song::find()
                 ->where([
                     'or',
                     ['first_guitar' => $userName, 'is_in_concert' => 1],
                     ['second_guitar' => $userName, 'is_in_concert' => 1],
-                    ['drums' => $userName, 'is_in_concert' => 1],
                     ['bass' => $userName, 'is_in_concert' => 1],
+                    ['drums' => $userName, 'is_in_concert' => 1],
+                    ['first_piano' => $userName, 'is_in_concert' => 1],
+                    ['second_piano' => $userName, 'is_in_concert' => 1],
                     ['first_voice' => $userName, 'is_in_concert' => 1],
                     ['second_voice' => $userName, 'is_in_concert' => 1],
-                    ['piano' => $userName, 'is_in_concert' => 1]
                 ])->count();
 
             if ($count_all > 0) {

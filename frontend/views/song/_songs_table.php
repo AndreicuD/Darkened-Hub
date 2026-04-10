@@ -84,9 +84,14 @@ $current_page = $page;
                     'label' => $searchModel::instrumentList()['drums'],
                 ],
                 [
-                    'attribute' => 'piano',
+                    'attribute' => 'first_piano',
                     'format' => 'text',
-                    'label' => $searchModel::instrumentList()['piano'],
+                    'label' => $searchModel::instrumentList()['first_piano'],
+                ],
+                [
+                    'attribute' => 'second_piano',
+                    'format' => 'text',
+                    'label' => $searchModel::instrumentList()['second_piano'],
                 ],
                 [
                     'attribute' => 'first_voice',
@@ -151,6 +156,8 @@ $current_page = $page;
             <?= $form->field($searchModel, 'artist')->label(Yii::t('app', 'Artist')) ?>
         </div>
         <hr>
+
+
         <div class="group_together">
             <?= $form->field($searchModel, 'first_guitar')->widget(Select2::class, [
                 'data' => $users,
@@ -168,6 +175,8 @@ $current_page = $page;
                 ],
             ])->label($searchModel::instrumentList()['second_guitar']); ?>
         </div>
+
+
         <div class="group_together">
             <?= $form->field($searchModel, 'bass')->widget(Select2::class, [
                 'data' => $users, // Map usernames from your user model,
@@ -176,6 +185,7 @@ $current_page = $page;
                     'allowClear' => true,
                 ],
             ])->label($searchModel::instrumentList()['bass']); ?>
+
             <?= $form->field($searchModel, 'drums')->widget(Select2::class, [
                 'data' => $users, // Map usernames from your user model,
                 'options' => ['placeholder' => $searchModel::instrumentList()['drums']],
@@ -184,13 +194,25 @@ $current_page = $page;
                 ],
             ])->label($searchModel::instrumentList()['drums']); ?>
         </div>
-        <?= $form->field($searchModel, 'piano')->widget(Select2::class, [
+
+
+        <?= $form->field($searchModel, 'first_piano')->widget(Select2::class, [
             'data' => $users, // Map usernames from your user model,
-            'options' => ['placeholder' => $searchModel::instrumentList()['piano']],
+            'options' => ['placeholder' => $searchModel::instrumentList()['first_piano']],
             'pluginOptions' => [
                 'allowClear' => true,
             ],
-        ])->label($searchModel::instrumentList()['piano']); ?>
+        ])->label($searchModel::instrumentList()['first_piano']); ?>
+        
+        <?= $form->field($searchModel, 'second_piano')->widget(Select2::class, [
+            'data' => $users, // Map usernames from your user model,
+            'options' => ['placeholder' => $searchModel::instrumentList()['second_piano']],
+            'pluginOptions' => [
+                'allowClear' => true,
+            ],
+        ])->label($searchModel::instrumentList()['second_piano']); ?>
+
+
         <div class="group_together">
             <?= $form->field($searchModel, 'first_voice')->widget(Select2::class, [
                 'data' => $users, // Map usernames from your user model,
@@ -199,6 +221,7 @@ $current_page = $page;
                     'allowClear' => true,
                 ],
             ])->label($searchModel::instrumentList()['first_voice']); ?>
+
             <?= $form->field($searchModel, 'second_voice')->widget(Select2::class, [
                 'data' => $users, // Map usernames from your user model,
                 'options' => ['placeholder' => $searchModel::instrumentList()['second_voice']],
@@ -207,7 +230,9 @@ $current_page = $page;
                 ],
             ])->label($searchModel::instrumentList()['second_voice']); ?>
         </div>
+
         <hr>
+
         <div class="group_together">
             <?= $form->field($searchModel, 'is_in_concert')->checkbox([
                 'uncheck' => '0',
@@ -216,6 +241,7 @@ $current_page = $page;
             ])->label(Yii::t('app', 'E în concert?')); ?>
 
             <?= $form->field($searchModel, 'setlist_spot')->label(Yii::t('app', 'Loc în Setlist')); ?>
+
             <?= $form->field($searchModel, 'state')->dropDownList([
                 '5' => $searchModel::stateList()['5'], // Gray for "Not done yet"
                 '4' => $searchModel::stateList()['4'],   // Green for "Great"

@@ -20,7 +20,8 @@ use yii\db\Expression;
  * @property string $second_guitar [varchar(254)]
  * @property string $bass [varchar(254)]
  * @property string $drums [varchar(254)]
- * @property string $piano [varchar(254)]
+ * @property string $first_piano [varchar(254)]
+ * @property string $second_piano [varchar(254)]
  * @property string $first_voice [varchar(254)]
  * @property string $second_voice [varchar(254)]
  * @property integer $created_at [datetime]
@@ -54,8 +55,8 @@ class Song extends \yii\db\ActiveRecord
             [['setlist_spot'], 'integer', 'max' => 100],
             [['is_in_concert'], 'integer', 'max' => 1],
             [['title', 'artist', 'first_guitar', 'second_guitar', 'bass', 'drums', 'piano', 'first_voice', 'second_voice'], 'string', 'max' => 254],
-            [['id', 'is_in_concert', 'setlist_spot', 'state', 'title', 'artist', 'first_guitar', 'second_guitar', 'bass', 'drums', 'piano', 'first_voice', 'second_voice', 'created_at', 'updated_at', 'person', 'page_size'], 'safe', 'on' => 'search'],
-            [['id', 'is_in_concert', 'setlist_spot', 'state', 'title', 'artist', 'first_guitar', 'second_guitar', 'bass', 'drums', 'piano', 'first_voice', 'second_voice', 'created_at', 'updated_at', 'person', 'page_size'], 'safe'],
+            [['id', 'is_in_concert', 'setlist_spot', 'state', 'title', 'artist', 'first_guitar', 'second_guitar', 'bass', 'drums', 'first_piano', 'second_piano', 'first_voice', 'second_voice', 'created_at', 'updated_at', 'person', 'page_size'], 'safe', 'on' => 'search'],
+            [['id', 'is_in_concert', 'setlist_spot', 'state', 'title', 'artist', 'first_guitar', 'second_guitar', 'bass', 'drums', 'first_piano', 'second_piano', 'first_voice', 'second_voice', 'created_at', 'updated_at', 'person', 'page_size'], 'safe'],
         ];
     }
 
@@ -75,7 +76,8 @@ class Song extends \yii\db\ActiveRecord
             'second_guitar' => Yii::t('app', 'Second Guitar'),
             'bass' => Yii::t('app', 'Bass'),
             'drums' => Yii::t('app', 'Drums'),
-            'piano' => Yii::t('app', 'Piano'),
+            'first_piano' => Yii::t('app', 'First Piano'),
+            'second_piano' => Yii::t('app', 'Second Piano'),
             'first_voice' => Yii::t('app', 'First Voice'),
             'second_voice' => Yii::t('app', 'Second Voice'),
             'page_size' => Yii::t('app', 'Page size'),
@@ -137,7 +139,8 @@ class Song extends \yii\db\ActiveRecord
                     ->orFilterWhere(['like', 'second_guitar', $this->person])
                     ->orFilterWhere(['like', 'bass', $this->person])
                     ->orFilterWhere(['like', 'drums', $this->person])
-                    ->orFilterWhere(['like', 'piano', $this->person])
+                    ->orFilterWhere(['like', 'first_piano', $this->person])
+                    ->orFilterWhere(['like', 'second_piano', $this->person])
                     ->orFilterWhere(['like', 'first_voice', $this->person])
                     ->orFilterWhere(['like', 'second_voice', $this->person]);
         }
@@ -151,7 +154,8 @@ class Song extends \yii\db\ActiveRecord
                 ->andFilterWhere(['like', 'second_guitar', $this->second_guitar])
                 ->andFilterWhere(['like', 'bass', $this->bass])
                 ->andFilterWhere(['like', 'drums', $this->drums])
-                ->andFilterWhere(['like', 'piano', $this->piano])
+                ->andFilterWhere(['like', 'first_piano', $this->piano])
+                ->andFilterWhere(['like', 'second_piano', $this->piano])
                 ->andFilterWhere(['like', 'first_voice', $this->first_voice])
                 ->andFilterWhere(['like', 'second_voice', $this->second_voice])
                 ->andFilterWhere(['like', 'created_at', $this->created_at])
@@ -178,13 +182,14 @@ class Song extends \yii\db\ActiveRecord
     public static function instrumentList()
     {
         return [
-            'first_guitar' => Yii::t('app', 'Prima Chitara'),
-            'second_guitar' => Yii::t('app', 'Second guitar'),
+            'first_guitar' => Yii::t('app', 'Prima chitară'),
+            'second_guitar' => Yii::t('app', 'A doua chitară'),
             'bass' => Yii::t('app', 'Bas'),
             'drums' => Yii::t('app', 'Tobe'),
-            'piano' => Yii::t('app', 'Pian'),
-            'first_voice' => Yii::t('app', 'Prima Voce'),
-            'second_voice' => Yii::t('app', 'Second voice'),
+            'first_piano' => Yii::t('app', 'Primul pian'),
+            'second_piano' => Yii::t('app', 'Al doilea pian'),
+            'first_voice' => Yii::t('app', 'Prima voce'),
+            'second_voice' => Yii::t('app', 'A doua voce'),
         ];
     }
 }
