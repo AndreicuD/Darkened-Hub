@@ -1069,7 +1069,13 @@ a.desc:after {
 #w0-togdata-all {
 	margin-right: 1em;
 }
-
+/* add bottom padding */
+.table_wrapper .btn-group {
+	margin-bottom: 1em;
+}
+.pagination {
+	margin-top: 0;
+}
 
 /* PROPOSAL TABLE */
 .proposal_table_wrapper {
