@@ -72,7 +72,7 @@ $this->title = Yii::t('app', 'Darkened Tunes');
                     <?php if($concert && ($concert->title || $concert->description)) { ?>
                         <div class="index-section" style="min-height: fit-content; padding: 1em 0 0 0;" id="concert_title">
                             <div class="flex-div" style="min-height: fit-content;">
-                                <h2 style="text-align: center; padding-top: 1em; font-weight: bold; font-size: 3em;"><?= $concert->title ?? ''; ?></h2>
+                                <h2 style="text-align: center; padding-top: 1em; font-weight: bold;" class="concert_title"><?= $concert->title ?? ''; ?></h2>
                             </div>
                             <div class="flex-div">
                                 <p style="margin-bottom: 0; font-weight: bold;" class="noto-sans-500"><?= $concert->description ?? ''; ?></p>

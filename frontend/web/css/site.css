@@ -502,6 +502,9 @@ a.desc:after {
 	margin: 0;
 	line-height:0.99;
 }
+.concert_title {
+	font-size: unset;
+}
 .concert_text {
 	font-weight: bold;
 	font-size: 2em;
