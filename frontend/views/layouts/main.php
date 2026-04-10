@@ -60,7 +60,7 @@ VANTA.FOG({
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
-        'brandImage' => '/img/logo-white.png',
+        'brandImage' => '/img/LogoWhite-mic.png',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar '.(Yii::$app->requestedRoute == 'site/index' ? 'navbar-index ' : '').'navbar-expand-md navbar-dark',

@@ -114,13 +114,21 @@ $songModel->artist = $model->artist;
                 ],
             ])->label($songModel::instrumentList()['drums']); ?>
         </div>
-        <?= $form->field($songModel, 'piano')->widget(Select2::class, [
+        <?= $form->field($songModel, 'first_piano')->widget(Select2::class, [
             'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
-            'options' => ['placeholder' => $songModel::instrumentList()['piano']],
+            'options' => ['placeholder' => $songModel::instrumentList()['first_piano']],
             'pluginOptions' => [
                 'allowClear' => true,
             ],
-        ])->label($songModel::instrumentList()['piano']); ?>
+        ])->label($songModel::instrumentList()['first_piano']); ?>
+        <?= $form->field($songModel, 'second_piano')->widget(Select2::class, [
+            'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
+            'options' => ['placeholder' => $songModel::instrumentList()['second_piano']],
+            'pluginOptions' => [
+                'allowClear' => true,
+            ],
+        ])->label($songModel::instrumentList()['second_piano']); ?>
+
         <div class="group_together">
             <?= $form->field($songModel, 'first_voice')->widget(Select2::class, [
                 'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
