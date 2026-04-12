@@ -503,13 +503,16 @@ a.desc:after {
 	line-height:0.99;
 }
 .concert_title {
-	font-size: unset;
+	font-size: 3em;
 }
 .concert_text {
 	font-weight: bold;
 	font-size: 2em;
 }
 @media(max-width: 767px) {
+	.concert_title {
+		font-size: unset;
+	}
 	.page_title {
 		font-size: calc(1.375rem + 1.5vw);
 	}
