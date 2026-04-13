@@ -667,8 +667,8 @@ a.desc:after {
 	align-items: center;
 	justify-content: flex-start;
 }
-.announcement-title-edit button {
-	justify-content: flex-end;
+.announcement-title-edit .flex-push-right {
+	margin-left: auto;
 }
 
 .announcement-hr {

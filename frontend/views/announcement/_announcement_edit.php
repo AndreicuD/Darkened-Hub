@@ -18,7 +18,7 @@ $svg_trash = '<svg xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  
     <div class="announcement-title-edit">
         <p style="margin: 0;"><b><?= Html::encode($model->title) ?></b></p>
 
-        <button onclick='openPopup("update_announcement_popup-<?= $model->id ?>")'  class="icon_btn">
+        <button onclick='openPopup("update_announcement_popup-<?= $model->id ?>")'  class="icon_btn flex-push-right">
             <?= $svg_adjustments; ?>
         </button>
         <button onclick='openPopup("delete_announcement_popup-<?=$model->id?>")'  class="icon_btn trash_btn">
