@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://darkened-tunes.ro" target="_blank" align="center">
-        <img src="https://darkened-tunes.ro/img/LogoColorTransparent.png" height="100px">
+        <img height="200" alt="image" src="https://github.com/user-attachments/assets/61abbd86-9e14-4608-a779-f037478505a3" />
     </a>
     <h1 align="center">Darkened Hub</h1>
     <br>
