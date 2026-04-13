@@ -11,7 +11,7 @@ $this->title = Yii::t('app', 'Update Melodie');
 ?>
 <div>
 <h1 style="text-align: center;" class="page_title"><?= Html::encode($this->title) ?></h1>
-    <?php $form_update = ActiveForm::begin(['id' => 'form-updatesong'.$model->id, 'type' => ActiveForm::TYPE_FLOATING, 'action' => ['song/update', 'id' => $model->id, 'page' => 'index']]); ?>
+    <?php $form_update = ActiveForm::begin(['id' => 'form-updatesong'.$model->id, 'type' => ActiveForm::TYPE_FLOATING, 'action' => ['song/update', 'id' => $model->id, 'page' => $page]]); ?>
 
     <?= $form_update->errorSummary($model);?>
 
@@ -53,13 +53,22 @@ $this->title = Yii::t('app', 'Update Melodie');
             ],
         ])->label($model::instrumentList()['drums']); ?>
     </div>
-    <?= $form_update->field($model, 'piano')->widget(Select2::class, [
-        'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
-        'options' => ['placeholder' => $model::instrumentList()['piano']],
-        'pluginOptions' => [
-            'allowClear' => true,
-        ],
-    ])->label($model::instrumentList()['piano']); ?>
+    <div class="group_together">
+        <?= $form_update->field($model, 'first_piano')->widget(Select2::class, [
+            'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
+            'options' => ['placeholder' => $model::instrumentList()['first_piano']],
+            'pluginOptions' => [
+                'allowClear' => true,
+            ],
+        ])->label($model::instrumentList()['first_piano']); ?>
+        <?= $form_update->field($model, 'second_piano')->widget(Select2::class, [
+            'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
+            'options' => ['placeholder' => $model::instrumentList()['second_piano']],
+            'pluginOptions' => [
+                'allowClear' => true,
+            ],
+        ])->label($model::instrumentList()['second_piano']); ?>
+    </div>
     <div class="group_together">
         <?= $form_update->field($model, 'first_voice')->widget(Select2::class, [
             'data' => ArrayHelper::map($user::find()->all(), 'username', 'username'), // Map usernames from your user model,
@@ -101,7 +110,7 @@ $this->title = Yii::t('app', 'Update Melodie');
     <div class="container text-center">
         <div class="row">
             <div class="col">
-            <?=Html::a('Anulează', Url::to(['song/' . $page]), ['class' => 'btn btn-danger']); ?>
+            <?=Html::a('Anulează', Url::to([$page]), ['class' => 'btn btn-danger']); ?>
             </div>
             <div class="col">
                 <input type="submit" value="Salvează Modificări" class="btn btn-success">

@@ -247,18 +247,18 @@ class SongController extends Controller
      * @param string $page
      * @return Response|string
      */
-    public function actionUpdate($id, $page = 'index'): Response|string
+    public function actionUpdate($id, $page): Response|string
     {
         $model = Song::findOne(['id' => $id]);
         //$model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('app', 'Melodia a fost modificată.'));
-            $this->redirect(['song/' . $page]);
+            $this->redirect([$page]);
         } else {
             Yii::$app->session->setFlash('error', Yii::t('app', 'A apărut o eroare în salvarea melodiei.'));
         }
 
-        return $this->redirect(['song/' . $page]);
+        return $this->redirect([$page]);
     }
 
     /**

@@ -54,7 +54,7 @@ class Song extends \yii\db\ActiveRecord
             [['state'], 'integer', 'max' => 5],
             [['setlist_spot'], 'integer', 'max' => 100],
             [['is_in_concert'], 'integer', 'max' => 1],
-            [['title', 'artist', 'first_guitar', 'second_guitar', 'bass', 'drums', 'piano', 'first_voice', 'second_voice'], 'string', 'max' => 254],
+            [['title', 'artist', 'first_guitar', 'second_guitar', 'bass', 'drums', 'first_piano', 'second_piano', 'first_voice', 'second_voice'], 'string', 'max' => 254],
             [['id', 'is_in_concert', 'setlist_spot', 'state', 'title', 'artist', 'first_guitar', 'second_guitar', 'bass', 'drums', 'first_piano', 'second_piano', 'first_voice', 'second_voice', 'created_at', 'updated_at', 'person', 'page_size'], 'safe', 'on' => 'search'],
             [['id', 'is_in_concert', 'setlist_spot', 'state', 'title', 'artist', 'first_guitar', 'second_guitar', 'bass', 'drums', 'first_piano', 'second_piano', 'first_voice', 'second_voice', 'created_at', 'updated_at', 'person', 'page_size'], 'safe'],
         ];

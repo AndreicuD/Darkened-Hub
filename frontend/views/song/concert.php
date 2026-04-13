@@ -34,6 +34,6 @@ $this->title = Yii::t('app', 'Concert');
         'dataProvider' => $dataProvider,
         'user' => $user,
         'users' => $users,
-        'page' => 'concert',
+        'page' => 'song/concert',
     ]) ?>
 </div>

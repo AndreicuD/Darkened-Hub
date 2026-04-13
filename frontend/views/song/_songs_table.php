@@ -195,23 +195,23 @@ $current_page = $page;
             ])->label($searchModel::instrumentList()['drums']); ?>
         </div>
 
-
-        <?= $form->field($searchModel, 'first_piano')->widget(Select2::class, [
-            'data' => $users, // Map usernames from your user model,
-            'options' => ['placeholder' => $searchModel::instrumentList()['first_piano']],
-            'pluginOptions' => [
-                'allowClear' => true,
-            ],
-        ])->label($searchModel::instrumentList()['first_piano']); ?>
-        
-        <?= $form->field($searchModel, 'second_piano')->widget(Select2::class, [
-            'data' => $users, // Map usernames from your user model,
-            'options' => ['placeholder' => $searchModel::instrumentList()['second_piano']],
-            'pluginOptions' => [
-                'allowClear' => true,
-            ],
-        ])->label($searchModel::instrumentList()['second_piano']); ?>
-
+        <div class="group_together">
+            <?= $form->field($searchModel, 'first_piano')->widget(Select2::class, [
+                'data' => $users, // Map usernames from your user model,
+                'options' => ['placeholder' => $searchModel::instrumentList()['first_piano']],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                ],
+            ])->label($searchModel::instrumentList()['first_piano']); ?>
+            
+            <?= $form->field($searchModel, 'second_piano')->widget(Select2::class, [
+                'data' => $users, // Map usernames from your user model,
+                'options' => ['placeholder' => $searchModel::instrumentList()['second_piano']],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                ],
+            ])->label($searchModel::instrumentList()['second_piano']); ?>
+        </div>
 
         <div class="group_together">
             <?= $form->field($searchModel, 'first_voice')->widget(Select2::class, [

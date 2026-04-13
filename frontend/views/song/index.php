@@ -31,7 +31,7 @@ $this->title = Yii::t('app', 'Melodii');
         'dataProvider' => $dataProvider,
         'user' => $user,
         'users' => $users,
-        'page' => 'index',
+        'page' => 'song/index',
     ]) ?>
 
 </div>
