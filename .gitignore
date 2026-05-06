@@ -34,3 +34,6 @@ ce-e-modificat.txt
 /frontend/web/img/user-icons
 =======
 >>>>>>> Stashed changes
+*.sql
+/.vscode
+/.ddev
